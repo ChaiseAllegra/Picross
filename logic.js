@@ -33,7 +33,9 @@ var numTurns;
 var numElem;
 var endTime;
 var doAttack;
+var doArcade;
 var timeLevelPassed =[];
+var arcadeLevelPassed=[];
 
 function setTime()
 {
@@ -43,22 +45,59 @@ function setTime()
 	numTurns=0;
 	numElem=0;
 	doAttack=false;
+	doArcade=false;
 	timeLevelPassed[0]=false;
 	timeLevelPassed[1]=false;
 	timeLevelPassed[2]=false;
+	arcadeLevelPassed[0]=false;
+	arcadeLevelPassed[1]=false;
+	arcadeLevelPassed[2]=false;
 }
 function arcade()
 {
-	level1();
-	//level2();
-	//level3();
+	numElem=0;
+	numTurns=0;
+	doAttack=true;
+	if(arcadeLevelPassed[0]==false&&arcadeLevelPassed[1]==false&&arcadeLevelPassed[2]==false)
+		level1();
 }
 function attack()
 {
+	numElem=0;
+	numTurns=0;
 	doAttack=true;
 	endTime=min+1;
-	level1();
+	//if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
+		level1();
 	//need to add timeLevelPassed[1]=true; to the win condition
+}
+function update()
+{
+	var x = setInterval(function () {
+	var i =0;
+
+	if(doAttack)
+	{
+	
+		if(timeLevelPassed[0]&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
+			level2();
+		
+		if(timeLevelPassed[0]&&timeLevelPassed[1]&&timeLevelPassed[2]==false)
+			level3();
+		if(timeLevelPassed[0]&&timeLevelPassed[1]&&timeLevelPassed[2])
+			doAttack=false;
+	}
+
+	if(doArcade)
+	{
+		if(arcadeLevelPassed[0]&&arcadeLevelPassed[1]==false&&arcadeLevelPassed[2]==false)
+			level2();
+		if(arcadeLevelPassed[0]&&arcadeLevelPassed[1]&&arcadeLevelPassed[2]==false)
+			level3();
+		if(arcadeLevelPassed[0]&&arcadeLevelPassed[1]&&arcadeLevelPassed[2])
+			doArcade=false;
+	}
+},1000);
 }
 function createTable(rowSize, colSize) {
 	row = rowSize;
@@ -120,7 +159,7 @@ function checkAns(cel) {
 				hitCount7++;
 				numElem--;
 				document.getElementById("elements").innerHTML=numElem;
-				console.log(hitCount7);
+				
 				/* ----------------Displaying the number of turns ---------------*/
 				numTurns++;
 				document.getElementById("turns").innerText=numTurns;
@@ -159,13 +198,64 @@ function checkAns(cel) {
 }
 
 function checkVictory() {
-	if (squareCount7 == hitCount7 || squareCount13 == hitCount13) {
-		alert("You won!");
+	if (squareCount7 == hitCount7) {
+		if(doAttack)
+		{
+			
+			if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
+			{
+				timeLevelPassed[0]=true;
+				console.log("level 1 passed");
+				hitCount7=0;
+				return;
+			}
+			if(timeLevelPassed[0]&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
+			{
+				timeLevelPassed[1]=true;
+				console.log("level 2 passed");
+				hitCount7=0;
+				return;
+			}
+			if(timeLevelPassed[0]&&timeLevelPassed[1]&&timeLevelPassed[2]==false)
+			{
+				console.log("level 3 passed");
+				timeLevelPassed[2]=true;
+				hitCount7=0;
+				return;
+			}
+		}
+		if(doArcade)
+		{
+			if(arcadeLevelPassed[0]==false&&arcadeLevelPassed[1]==false&&arcadeLevelPassed[2]==false)
+			{
+				arcadeLevelPassed[0]=true;
+				hitCount7=0;
+				return;
+			}
+			if(arcadeLevelPassed[0]&&arcadeLevelPassed[1]==false&&arcadeLevelPassed[2]==false)
+			{
+				arcadeLevelPassed[1]=true;
+				hitCount7=0;
+				return;
+			}
+			if(arcadeLevelPassed[0]&&arcadeLevelPassed[1]&&arcadeLevelPassed[2]==false)
+			{
+				arcadeLevelPassed[2]=true;
+				hitCount7=0;
+				return;
+			}
+		}
+		alert("Level Complete!");
+
+		
 	}
 }
 
 function initTableAnsw() {
 	/* -------------------- For 7x7 tables -------------------------*/
+	numElem=0;
+	numTurns=0;
+	document.getElementById("turns").innerHTML=numTurns;
 	var tbl = document.getElementById("table");
 	for (var i = 0; i < tbl.rows.length; i++) {
 		hitArr.push([]);
@@ -349,19 +439,36 @@ function addTips() {
 
 function level1() {//creates an X
 	/* -------------------- For 7x7 tables -------------------------*/
+	numTurns=0;
+	document.getElementById("turns").innerHTML=numTurns;
 	var tbl = document.getElementById("table");
 	for (var i = 0; i < tbl.rows.length; i++) {
 		hitArr.push([]);
+		boolArr7.push([]);
+		rowTip.push([]);
+		colTip.push([]);
 		for (var j = 0; j < tbl.rows[i].cells.length; j++)
 		{
+			boolArr7[i][j] = 0;
+			rowTip[i][j] = 0;
+			colTip[i][j] = 0;
 			if(i==j)//left side of X
-			hitArr[i][j] = 1;
+			{
+				hitArr[i][j] = 1;
+				numElem++;
+				squareCount7++;
+			}
 			else if((j+i)==6)//right side of X
-			hitArr[i][j] = 1;
+			{
+				hitArr[i][j] = 1;
+				numElem++;
+				squareCount7++;
+			}
 			else
 			hitArr[i][j] = 0;
 		}
 	}
+	
 	for (var i = 0; i < tbl.rows.length; i++) {
 		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
 			if (hitArr[i][j] == "1") {
@@ -369,12 +476,15 @@ function level1() {//creates an X
 			}
 		}
 	}
+	document.getElementById("elements").innerHTML=numElem;
 	/* -------------------- For 13x13 tables -------------------------*/
 	var tbl2 = document.getElementById("table2");
 	for (var i = 0; i < tbl2.rows.length; i++) {
 		hitArr2.push([]);
+		boolArr7.push([]);
 		for (var j = 0; j < tbl2.rows[i].cells.length; j++)
 		{
+			boolArr7[i][j] = 0;
 			if(i==j)//left side of X
 			hitArr2[i][j] = 1;
 			else if((j+i)==12)//right side of X
@@ -390,14 +500,19 @@ function level1() {//creates an X
 			}
 		}
 	}
+	
 }
 function level2() {//creates a simley face :)
 	/* -------------------- For 7x7 tables -------------------------*/
+	numTurns=0;
+	document.getElementById("turns").innerHTML=numTurns;
 	var tbl = document.getElementById("table");
 	for (var i = 0; i < tbl.rows.length; i++) {
 		hitArr.push([]);
+		boolArr7.push([]);
 		for (var j = 0; j < tbl.rows[i].cells.length; j++)
 		{
+			boolArr7[i][j] = 0;
 			hitArr[i][j] = 0;
 		}
 	}
@@ -408,6 +523,10 @@ function level2() {//creates a simley face :)
 	hitArr[5][2]=1;
 	hitArr[5][3]=1;
 	hitArr[2][4]=1;
+	numElem=7;
+	squareCount7=7;
+
+	document.getElementById("elements").innerHTML=numElem;
 
 	for (var i = 0; i < tbl.rows.length; i++) {
 		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
@@ -420,8 +539,10 @@ function level2() {//creates a simley face :)
 	var tbl2 = document.getElementById("table2");
 	for (var i = 0; i < tbl2.rows.length; i++) {
 		hitArr2.push([]);
+		boolArr13.push([]);
 		for (var j = 0; j < tbl2.rows[i].cells.length; j++)
 		{
+			boolArr13[i][j]=0;
 			hitArr2[i][j] = 0;
 		}
 	}
@@ -443,11 +564,19 @@ function level2() {//creates a simley face :)
 }
 function level3() {//creates 
 	/* -------------------- For 7x7 tables -------------------------*/
+	numTurns=0;
+	document.getElementById("turns").innerHTML=numTurns;
 	var tbl = document.getElementById("table");
+	numElem=1;
+	squareCount7=1;
+	document.getElementById("elements").innerHTML=numElem;
+
 	for (var i = 0; i < tbl.rows.length; i++) {
 		hitArr.push([]);
+		boolArr7.push([]);
 		for (var j = 0; j < tbl.rows[i].cells.length; j++)
 		{
+			boolArr7[i][j]=0;
 			hitArr[i][j] = 0;
 		}
 	}
@@ -463,8 +592,10 @@ function level3() {//creates
 	var tbl2 = document.getElementById("table2");
 	for (var i = 0; i < tbl2.rows.length; i++) {
 		hitArr2.push([]);
+		boolArr13.push([]);
 		for (var j = 0; j < tbl2.rows[i].cells.length; j++)
 		{
+			boolArr13[i][j]=0;
 			hitArr2[i][j] = 0;
 		}
 	}
