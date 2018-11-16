@@ -31,6 +31,9 @@ var min;
 var hour;
 var numTurns;
 var numElem;
+var endTime;
+var doAttack;
+var timeLevelPassed =[];
 
 function setTime()
 {
@@ -39,15 +42,24 @@ function setTime()
 	hour=0;
 	numTurns=0;
 	numElem=0;
+	doAttack=false;
+	timeLevelPassed[0]=false;
+	timeLevelPassed[1]=false;
+	timeLevelPassed[2]=false;
 }
 function arcade()
 {
 	level1();
-	console.log("here");
 	//level2();
 	//level3();
 }
-
+function attack()
+{
+	doAttack=true;
+	endTime=min+1;
+	level1();
+	//need to add timeLevelPassed[1]=true; to the win condition
+}
 function createTable(rowSize, colSize) {
 	row = rowSize;
 	length = colSize;
@@ -255,6 +267,12 @@ function timer() {
 		}
 		if(hour>0)
 			document.getElementById("demo").innerHTML =hour+" hours "+min+" minutes "+sec+" seconds";
+			if(min>=endTime&&doAttack)
+			{
+				alert("fail");
+				console.log(min);
+				doAttack=false;	
+			}
 	}, 1000);
 }
 
