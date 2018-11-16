@@ -45,7 +45,18 @@
     <div id="innerBody">
         <div id="tblCont">
             <table id="table">
+                <tr id="topRow">
+                    <td class="content" id="r0"></td>
+                    <td class="content" id="r1"></td>
+                    <td class="content" id="r2"></td>
+                    <td class="content" id="r3"></td>
+                    <td class="content" id="r4"></td>
+                    <td class="content" id="r5"></td>
+                    <td class="content" id="r6"></td>
+                    <td class="content" id="r7"></td>
+                </tr>
                 <tr>
+                    <td class="content" id="t0"></td>
                     <td class="content" id="00"></td>
                     <td class="content" id="01"></td>
                     <td class="content" id="02"></td>
@@ -55,6 +66,7 @@
                     <td class="content" id="06"></td>
                 </tr>
                 <tr>
+                    <td class="content" id="t1"></td>
                     <td class="content" id="10"></td>
                     <td class="content" id="11"></td>
                     <td class="content" id="12"></td>
@@ -64,6 +76,7 @@
                     <td class="content" id="16"></td>
                 </tr>
                 <tr>
+                    <td class="content" id="t2"></td>
                     <td class="content" id="20"></td>
                     <td class="content" id="21"></td>
                     <td class="content" id="22"></td>
@@ -73,6 +86,7 @@
                     <td class="content" id="26"></td>
                 </tr>
                 <tr>
+                    <td class="content" id="t3"></td>
                     <td class="content" id="30"></td>
                     <td class="content" id="31"></td>
                     <td class="content" id="32"></td>
@@ -82,6 +96,7 @@
                     <td class="content" id="36"></td>
                 </tr>
                 <tr>
+                    <td class="content" id="t4"></td>
                     <td class="content" id="40"></td>
                     <td class="content" id="41"></td>
                     <td class="content" id="42"></td>
@@ -91,6 +106,7 @@
                     <td class="content" id="46"></td>
                 </tr>
                 <tr>
+                    <td class="content" id="t5"></td>
                     <td class="content" id="50"></td>
                     <td class="content" id="51"></td>
                     <td class="content" id="52"></td>
@@ -100,6 +116,7 @@
                     <td class="content" id="56"></td>
                 </tr>
                 <tr>
+                    <td class="content" id="t6"></td>
                     <td class="content" id="60"></td>
                     <td class="content" id="61"></td>
                     <td class="content" id="62"></td>
@@ -188,7 +205,7 @@
                     <td class="content" id="4 10"></td>
                     <td class="content" id="4 11"></td>
                     <td class="content" id="4 12"></td>
-                </tr >
+                </tr>
                 <tr>
                     <td class="content" id="5 0"></td>
                     <td class="content" id="5 1"></td>
@@ -335,14 +352,16 @@
                 <input type="text" id="BGcolorPicker" placeholder="Grid Color">
             </li>
             <li style="width:3%; margin-top: 0.2%;">
-                 <button name="buttonExecute" id="buttonGrid"onclick="gridColor(document.getElementById('BGcolorPicker').value)" type="button" style="width:20px;height:20px;"></button>
+                <button name="buttonExecute" id="buttonGrid" onclick="gridColor(document.getElementById('BGcolorPicker').value)"
+                    type="button" style="width:20px;height:20px;"></button>
             </li>
 
             <li id="bgColor">
                 <input type="text" id="colorPicker" placeholder="Background Color">
             </li>
             <li style="width:3%; margin-top: 0.2%;">
-                <button id="bGColor" name="colorButton" onclick="backGroundColor(document.getElementById('colorPicker').value)" type="button" style="width:20px;height:20px;"></button>
+                <button id="bGColor" name="colorButton" onclick="backGroundColor(document.getElementById('colorPicker').value)"
+                    type="button" style="width:20px;height:20px;"></button>
             </li>
             <li>
                 <button>Tool</button>
@@ -355,9 +374,9 @@
             </li>
             <li>
                 <button onclick="attack();">Attack</button>
-            </li>        
+            </li>
             <li>
-               <button id="elements">Elements</button> 
+                <button id="elements">Elements</button>
             </li>
             <li>
                 <button id="turns">Turns</button>
