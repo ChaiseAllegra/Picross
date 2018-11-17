@@ -77,11 +77,21 @@ function displayTips() {
 				var elemID = "" + "t" + i;
 				var element = document.getElementById(elemID);
 				var insElement = " " + rowTip[i][j];
-				element.innerHTML = insElement;
+				element.insertAdjacentHTML( 'beforeend', insElement );
 			}
 		}
 	}
-	console.log(tbl);
+
+	for (var i = 0; i < colTip.length; i++) {
+		for (var j = 0; j < colTip.length; j++) {
+			if (colTip[i][j] > 0) {
+				var elemID = "" + "r" + (i+1);
+				var element = document.getElementById(elemID);
+				var insElement = " " + colTip[i][j] + "<br>";
+				element.insertAdjacentHTML( 'beforeend', insElement );
+			}
+		}
+	}
 }
 
 function update() {
@@ -277,7 +287,7 @@ function initTableAnsw() {
 		}
 	}
 	for (var i = 0; i < tbl.rows.length-1; i++) {
-		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			if (hitArr[i][j] == "1") {
 				squareCount7++;
 				tbl.rows[i].cells[j].style.backgroundColor = "";
@@ -286,14 +296,14 @@ function initTableAnsw() {
 	}
 	/* -------------------- For 13x13 tables -------------------------*/
 	var tbl2 = document.getElementById("table2");
-	for (var i = 0; i < tbl2.rows.length; i++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
 		hitArr2.push([]);
 		boolArr7.push([]);
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++)
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++)
 			hitArr2[i][j] = Math.round(Math.random());
 	}
-	for (var i = 0; i < tbl2.rows.length; i++) {
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++) {
 			if (hitArr2[i][j] == "1") {
 				squareCount13++;
 				tbl2.rows[i].cells[j].style.backgroundColor = "";
@@ -442,12 +452,12 @@ function level1() {//creates an X
 	numTurns = 0;
 	document.getElementById("turns").innerHTML = numTurns;
 	var tbl = document.getElementById("table");
-	for (var i = 0; i < tbl.rows.length; i++) {
+	for (var i = 0; i < tbl.rows.length-q; i++) {
 		hitArr.push([]);
 		boolArr7.push([]);
 		rowTip.push([]);
 		colTip.push([]);
-		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			boolArr7[i][j] = 0;
 			rowTip[i][j] = 0;
 			colTip[i][j] = 0;
@@ -468,8 +478,8 @@ function level1() {//creates an X
 		}
 	}
 
-	for (var i = 0; i < tbl.rows.length; i++) {
-		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+	for (var i = 0; i < tbl.rows.length-q; i++) {
+		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			if (hitArr[i][j] == "1") {
 				tbl.rows[i].cells[j].style.backgroundColor = "";
 			}
@@ -478,10 +488,10 @@ function level1() {//creates an X
 	document.getElementById("elements").innerHTML = numElem;
 	/* -------------------- For 13x13 tables -------------------------*/
 	var tbl2 = document.getElementById("table2");
-	for (var i = 0; i < tbl2.rows.length; i++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
 		hitArr2.push([]);
 		boolArr7.push([]);
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++) {
 			boolArr7[i][j] = 0;
 			if (i == j)//left side of X
 				hitArr2[i][j] = 1;
@@ -491,8 +501,8 @@ function level1() {//creates an X
 				hitArr2[i][j] = 0;
 		}
 	}
-	for (var i = 0; i < tbl2.rows.length; i++) {
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++) {
 			if (hitArr2[i][j] == "1") {
 				tbl2.rows[i].cells[j].style.backgroundColor = "";
 			}
@@ -505,10 +515,10 @@ function level2() {//creates a simley face :)
 	numTurns = 0;
 	document.getElementById("turns").innerHTML = numTurns;
 	var tbl = document.getElementById("table");
-	for (var i = 0; i < tbl.rows.length; i++) {
+	for (var i = 0; i < tbl.rows.length-1; i++) {
 		hitArr.push([]);
 		boolArr7.push([]);
-		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			boolArr7[i][j] = 0;
 			hitArr[i][j] = 0;
 		}
@@ -525,8 +535,8 @@ function level2() {//creates a simley face :)
 
 	document.getElementById("elements").innerHTML = numElem;
 
-	for (var i = 0; i < tbl.rows.length; i++) {
-		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+	for (var i = 0; i < tbl.rows.length-1; i++) {
+		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			if (hitArr[i][j] == "1") {
 				tbl.rows[i].cells[j].style.backgroundColor = "";
 			}
@@ -534,10 +544,10 @@ function level2() {//creates a simley face :)
 	}
 	/* -------------------- For 13x13 tables -------------------------*/
 	var tbl2 = document.getElementById("table2");
-	for (var i = 0; i < tbl2.rows.length; i++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
 		hitArr2.push([]);
 		boolArr13.push([]);
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++) {
 			boolArr13[i][j] = 0;
 			hitArr2[i][j] = 0;
 		}
@@ -550,8 +560,8 @@ function level2() {//creates a simley face :)
 	hitArr2[5][3] = 1;
 	hitArr2[2][4] = 1;
 
-	for (var i = 0; i < tbl2.rows.length; i++) {
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++) {
 			if (hitArr2[i][j] == "1") {
 				tbl2.rows[i].cells[j].style.backgroundColor = "";
 			}
@@ -567,17 +577,17 @@ function level3() {//creates
 	squareCount7 = 1;
 	document.getElementById("elements").innerHTML = numElem;
 
-	for (var i = 0; i < tbl.rows.length; i++) {
+	for (var i = 0; i < tbl.rows.length-1; i++) {
 		hitArr.push([]);
 		boolArr7.push([]);
-		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			boolArr7[i][j] = 0;
 			hitArr[i][j] = 0;
 		}
 	}
 	hitArr[0][0] = 1;
-	for (var i = 0; i < tbl.rows.length; i++) {
-		for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+	for (var i = 0; i < tbl.rows.length-1; i++) {
+		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			if (hitArr[i][j] == "1") {
 				tbl.rows[i].cells[j].style.backgroundColor = "";
 			}
@@ -585,17 +595,17 @@ function level3() {//creates
 	}
 	/* -------------------- For 13x13 tables -------------------------*/
 	var tbl2 = document.getElementById("table2");
-	for (var i = 0; i < tbl2.rows.length; i++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
 		hitArr2.push([]);
 		boolArr13.push([]);
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++) {
 			boolArr13[i][j] = 0;
 			hitArr2[i][j] = 0;
 		}
 	}
 	hitArr2[10][10] = 1;
-	for (var i = 0; i < tbl2.rows.length; i++) {
-		for (var j = 0; j < tbl2.rows[i].cells.length; j++) {
+	for (var i = 0; i < tbl2.rows.length-1; i++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length-1; j++) {
 			if (hitArr2[i][j] == "1") {
 				tbl2.rows[i].cells[j].style.backgroundColor = "";
 			}

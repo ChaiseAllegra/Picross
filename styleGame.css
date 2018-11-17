@@ -29,6 +29,10 @@ table {
     border: 2px solid white;
     table-layout: fixed;
 }
+/*#numRow td::after
+{
+    margin-top:0%;
+}*/
 .backG {
     position: absolute;
     top: 0;
@@ -41,8 +45,8 @@ table {
     text-align: center; 
     margin: 0 auto;
     font-size: 50px;
-    top: 50%;
-    transform: translateY(-65%);
+    top: 10%;
+    /*transform: translateY(-65%);*/
 }
 .backG2 {
     position: absolute;
@@ -62,7 +66,8 @@ table {
 td {
     padding: 0;
     word-wrap: break-word;
-    width:10%;
+    width:20px;
+    height: 60px;
     position:relative;
     padding-top:0;
     padding-bottom:0;
@@ -73,11 +78,11 @@ td {
     font-family: 'Aldrich', sans-serif;
    
 }
-td:after{
+/*td:after{
     content:'';
     display:block;
     margin-top: 91%;
-}
+}*/
 div#tblCont2 td:after {
     margin-top: 85%;
 }
@@ -547,3 +552,17 @@ div#text button {
 /*#06D6A0
     #009FFD
   */
+
+  .rowLabel
+  {
+      text-align: center;
+      margin: 0 auto;
+  }
+
+  .colLabel
+  {
+      text-align: center;
+      margin: 0 auto;
+      
+  }
+ 
