@@ -17,13 +17,22 @@ div#tblCont2 {
     position: relative;
 }
 div#buttons button {
-    width: 95%;
+    /*width: 95%;*/
     border: 1px solid white;
     background: -webkit-linear-gradient(-45deg, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%);
     background-size: 800% 800%;
     color: white;
     font-size: 0.7em;
+    width: 85px;
+    height: 30px;
+    margin-top: 0px;
 }
+div#buttons button:hover
+{
+    background: -webkit-linear-gradient(-45deg, rgba(236,15,152,0.65) 0%,rgba(0,0,0,0) 100%);
+    box-shadow: 1px 1px 8px 3px rgba(236,15,151,1);
+}
+
 input#BGcolorPicker {
     width: 90%;
     font-weight: 200;
