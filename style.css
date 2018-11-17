@@ -597,7 +597,10 @@ html, body{
         width: 40.5%;
         margin: auto;
         border-collapse: collapse;
-        border: 2px solid white;
+    }
+    td {
+        width: 5.5em;
+        height: 5.15em;
     }
     div#Lcont2 {
         float: left;
