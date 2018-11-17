@@ -579,11 +579,7 @@ html, body{
         float: right;
         display: initial;
     }
-    td:after {
-        content: '';
-        display: block;
-        margin-top: 82%;
-    }
+
     div#innerBody {
         width: 100%;
         height: 77%;
