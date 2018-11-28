@@ -579,6 +579,12 @@ html, body{
         float: right;
         display: initial;
     }
+    li#gridColor {
+        margin-top: 0.05%;
+    }
+    li#bgColor {
+        margin-top: 0.05%;
+    }
     div#buttons button {
         width: 85px;
     }
@@ -593,9 +599,13 @@ html, body{
     }
     li#gridColorEnter {
         width: 3%!important;
+        margin-top: 0.5%;
+        margin-right: 0.5%;
     }
     li#bgColorEnter {
         width: 3%!important;
+        margin-top: 0.5%;
+        margin-right: 0.5%;
     }
     div#innerBody {
         width: 100%;
