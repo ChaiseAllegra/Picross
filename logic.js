@@ -122,7 +122,6 @@ function update() {
 function createTable(rowSize, colSize) {
 	row = rowSize;
 	length = colSize;
-	deleteTable();
 	var body = document.getElementById("innerBody");
 	var tbl = document.getElementById("table");
 
@@ -145,8 +144,15 @@ function createTable(rowSize, colSize) {
 }
 
 function deleteTable() {
-	document.getElementById("table").innerHTML = "";
+	document.getElementsByTagName("table")[0];
+	var x = document.getElementsByClassName("content");
+	for (var i = 0; i < x.length; i++) {
+		var item = x[i];
+		item.style.backgroundColor = "rgba(170, 170, 170, 0.4)";
+		item.innerHTML = "";
+	}
 }
+
 
 function cellClick() {
 	/* -------------------For 7x7 tables ------------------------*/
@@ -173,7 +179,7 @@ function checkAns(cel) {
 		var splitted = num.map(Number);
 		if (hitArr[splitted[0]][splitted[1]] == "1") {
 			cel.style.backgroundColor = "rgb(33, 204, 138)";
-			cel.style.boxShadow = "0 0 5px 2px rgb(0, 187, 140) inset";
+			//cel.style.boxShadow = "0 0 5px 2px rgb(0, 187, 140) inset";
 			if (boolArr7[splitted[0]][splitted[1]] != 1) {
 				boolArr7[splitted[0]][splitted[1]] = 1;
 				hitCount7++;
@@ -189,7 +195,7 @@ function checkAns(cel) {
 		else {
 			cel.innerHTML = "<div class = 'backG'>X</div>";
 			cel.style.backgroundColor = "rgba(255, 255, 255, 0.65)";
-			cel.style.boxShadow = "0 0 5px 2px rgba(170, 170, 170, 0.4) inset";
+			//cel.style.boxShadow = "0 0 5px 2px rgba(170, 170, 170, 0.4) inset";
 			if (boolArr7[splitted[0]][splitted[1]] != 2) {
 				boolArr7[splitted[0]][splitted[1]] = 2;
 				/* ----------------Displaying the number of turns ---------------*/
@@ -205,13 +211,13 @@ function checkAns(cel) {
 		var splitted2 = num2.map(Number);
 		if (hitArr2[splitted2[0]][splitted2[1]] == "1") {
 			cel.style.backgroundColor = "rgb(0, 235, 176)";
-			cel.style.boxShadow = "0 0 5px 2px rgb(0, 187, 140) inset";
+			//cel.style.boxShadow = "0 0 5px 2px rgb(0, 187, 140) inset";
 			hitCount13++;
 		}
 		else {
 			cel.innerHTML = "<div class = 'backG2'>X</div>";
 			cel.style.backgroundColor = "rgba(255, 255, 255, 0.65)";
-			cel.style.boxShadow = "0 0 5px 2px rgba(170, 170, 170, 0.4) inset";
+			//cel.style.boxShadow = "0 0 5px 2px rgba(170, 170, 170, 0.4) inset";
 		}
 	}
 	checkVictory();
@@ -264,6 +270,7 @@ function checkVictory() {
 }
 
 function initTableAnsw() {
+	deleteTable();
 	/* -------------------- For 7x7 tables -------------------------*/
 	numElem = 0;
 	numTurns = 0;
