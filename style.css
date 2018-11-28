@@ -579,7 +579,24 @@ html, body{
         float: right;
         display: initial;
     }
-
+    div#buttons button {
+        width: 85px;
+    }
+    input#BGcolorPicker {
+        width: 90%;
+    }
+    input#colorPicker {
+        width: 90%;
+    }
+    li#timeButton {
+        width: 11%!important;
+    }
+    li#gridColorEnter {
+        width: 3%!important;
+    }
+    li#bgColorEnter {
+        width: 3%!important;
+    }
     div#innerBody {
         width: 100%;
         height: 77%;
@@ -662,6 +679,37 @@ html, body{
 @media only screen and (max-width: 1299px) and (min-width: 1025px)  {
     div#Rcont {
         float: right;
+    }
+    div#buttons button {
+        width: 65px;
+    }
+    input#BGcolorPicker {
+        width: 80%;
+    }
+    input#colorPicker {
+        width: 80%;
+    }
+    li#timeButton {
+        width: 13%!important;
+    }
+    li#gridColorEnter {
+    width: 5%!important; 
+    margin-top: 0.5%;
+    }
+    td {
+        height: 4em;
+    }
+    li#gridColor {
+        margin-left: 0.5%;
+        margin-top:0%;
+    }
+    li#bgColor {
+        margin-top: 0%;
+    }
+    li#bgColorEnter {
+        width: 5%!important;
+        
+    margin-top: 0.5%;
     }
     div#Lcont2 {
         display: none;
