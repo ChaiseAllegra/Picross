@@ -297,7 +297,7 @@ function initTableAnsw() {
 		for (var j = 0; j < tbl.rows[i].cells.length-1; j++) {
 			if (hitArr[i][j] == "1") {
 				squareCount7++;
-				tbl.rows[i].cells[j].style.backgroundColor = "";
+				//tbl.rows[i].cells[j].style.backgroundColor = "";
 			}
 		}
 	}
