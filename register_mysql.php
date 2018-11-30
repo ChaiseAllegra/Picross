@@ -5,21 +5,28 @@ require_once 'config_mysql.php';
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
+$fname = $lname = $age = $gender = $loc = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate username
+    $firstname = trim($_POST["fname"]);
+    $lastname = trim($_POST["lname"]);
+    $age = trim($_POST["age"]);
+    $gender = trim($_POST["gender"]);
+    $location = trim($_POST["loc"]);
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT id FROM admin WHERE login = DeathOnADinosaur";
+        $sql = "SELECT id FROM users WHERE login = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);       
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
             // Set parameters
-            $param_username = trim($_POST["username"]);          
+            $param_username = trim($_POST["username"]);  
+            //echo $param_username;      
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 /* store result */
@@ -59,11 +66,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO admin (login, password) VALUES (?, ?)";
-         
+        $sql = "INSERT INTO users (login, password, fname, lname, age, gender, loc) VALUES (?, ?, ?, ?, ?, ?, ?)";
+         //echo "outer pass";
         if($stmt = mysqli_prepare($link, $sql)){
+            //echo "in pass";
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_username, $param_password, $firstname, $lastname, $age, $gender, $location);
             
             // Set parameters
             $param_username = $username;
@@ -111,6 +119,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="confirm_password" value="<?php echo $confirm_password; ?>">
                 <span><?php echo $confirm_password_err; ?></span>
             </div>
+            <!-------------------------------------------------------------------------------------------->
+            <div>
+                <label>First Name:<sup>*</sup></label>
+                <input type="text" name="fname">
+            </div>
+            <div>
+                <label>Last Name:<sup>*</sup></label>
+                <input type="text" name="lname">
+            </div>
+            <div>
+                <label>Age:<sup>*</sup></label>
+                <input type="text" name="age">
+            </div>
+            <div>
+                <label>Gender:<sup>*</sup></label>
+                <input type="text" name="gender">
+            </div>
+            <div>
+                <label>Location:<sup>*</sup></label>
+                <input type="text" name="loc">
+            </div>
+            <!-------------------------------------------------------------------------------------------->
+           
             <div>
                 <input type="submit" value="Submit">
                 <input type="reset"  value="Reset">

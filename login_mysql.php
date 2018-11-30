@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT login, password FROM admin WHERE login = ?";
+        $sql = "SELECT login, password FROM users WHERE login = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Store result
                 mysqli_stmt_store_result($stmt);  
                 // Check if username exists, if yes then verify password
-                if(mysqli_stmt_num_rows($stmt) == 1){                    
+                if(mysqli_stmt_num_rows($stmt) == 1){  
                     // Bind result variables
 					mysqli_stmt_bind_result($stmt, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
@@ -49,7 +49,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             save the username to the session */
                             session_start();
                             $_SESSION['username'] = $username;      
-                            header("location: welcome_mysql.php");
+                            header("location: page_game.html");
+                            
                         } else{
                             // Display an error message if password is not valid
                             $password_err = 'The password you entered was not valid.';
