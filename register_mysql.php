@@ -125,39 +125,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username:<sup>*</sup></label>
-                <input type="text" name="username" value="<?php echo $username; ?>">
+                <input style="margin-left:3%;"type="text" name="username" value="<?php echo $username; ?>">
                 <span><?php echo $username_err; ?></span>
             </div>    
             <div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password:<sup>*</sup></label>
-                <input style="margin-left:1.5%;"type="password" name="password" value="<?php echo $password; ?>">
+                <input style="margin-left:4.5%;" style="margin-left:1.5%;"type="password" name="password" value="<?php echo $password; ?>">
                 <span><?php echo $password_err; ?></span>
             </div>
             <div <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
                 <label>Confirm:<sup>*</sup></label>
-                <input style="margin-left:6%;"type="password" name="confirm_password" value="<?php echo $confirm_password; ?>">
+                <input style="margin-left:9%;"type="password" name="confirm_password" value="<?php echo $confirm_password; ?>">
                 <span><?php echo $confirm_password_err; ?></span>
             </div>
 
             <div>
                 <label>First Name:<sup>*</sup></label>
-                <input type="text" name="fname">
+                <input style="margin-left:0%;" type="text" name="fname">
             </div>
             <div>
                 <label>Last Name:<sup>*</sup></label>
-                <input type="text" name="lname">
+                <input  style="margin-left:1%;"type="text" name="lname">
             </div>
             <div>
                 <label>Age:<sup>*</sup></label>
-                <input type="text" name="age">
+                <input  style="margin-left:23%;"type="text" name="age">
             </div>
             <div>
                 <label>Gender:<sup>*</sup></label>
-                <input type="text" name="gender">
+                <input  style="margin-left:11.5%;" type="text" name="gender">
             </div>
             <div>
                 <label>Location:<sup>*</sup></label>
-                <input type="text" name="loc">
+                <input  style="margin-left:7%;" type="text" name="loc">
             </div>
 
            

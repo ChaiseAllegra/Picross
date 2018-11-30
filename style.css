@@ -51,8 +51,8 @@ section#register {
     border-width: 3px 3px 3px 3px;
     border-style: solid;
     border-image: linear-gradient(to bottom, #30bd99, #ae3ecc) 27;
-    margin-top: 10%;
-    margin-bottom: 5%;
+    margin-top: 5%;
+    margin-bottom: 4%;
 }
 div#registerDiv input {
     width: 50%;
