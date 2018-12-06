@@ -54,6 +54,7 @@ function setTime() {
 }
 function arcade() {
 	ajaxFunc();
+	
 	numElem = 0;
 	numTurns = 0;
 	doAttack = true;
@@ -65,25 +66,22 @@ function attack() {
 	numTurns = 0;
 	doAttack = true;
 	endTime = min + 1;
-	//if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
+	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
 	level1();
 	//need to add timeLevelPassed[1]=true; to the win condition
 }
 
 function ajaxFunc() {
-	$.ajax({
-		url : 'database_init.php',
-		//type : 'GET',
-		data : "",//{'numberOfWords' : 10},
-		dataType:'json',
-		success : function(data) {              
-			alert('Good job!');
-		},
-		error : function(request,error)
-		{
-			alert("Request: "+JSON.stringify(request));
-		}
-	});
+$.ajax({
+    url: "http://localhost/picross/database_init.php",
+
+    dataType: "jsonp",
+    success: function( response ) {
+        console.log( response ); // server response
+    }
+
+});
+
 }
 
 function displayTips() {
@@ -476,7 +474,7 @@ function level1() {//creates an X
 	numTurns = 0;
 	document.getElementById("turns").innerHTML = numTurns;
 	var tbl = document.getElementById("table");
-	for (var i = 0; i < tbl.rows.length - q; i++) {
+	for (var i = 0; i < tbl.rows.length - 1; i++) {
 		hitArr.push([]);
 		boolArr7.push([]);
 		rowTip.push([]);
@@ -502,7 +500,7 @@ function level1() {//creates an X
 		}
 	}
 
-	for (var i = 0; i < tbl.rows.length - q; i++) {
+	for (var i = 0; i < tbl.rows.length - 1; i++) {
 		for (var j = 0; j < tbl.rows[i].cells.length - 1; j++) {
 			if (hitArr[i][j] == "1") {
 				tbl.rows[i].cells[j].style.backgroundColor = "";
