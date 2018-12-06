@@ -1,5 +1,5 @@
 <?php
-   $dbhost = '10.62.69.150';
+   $dbhost = '10.62.79.43';
    $dbuser = 'DeathOnADinosaur';
    $dbpass = 'password';
    $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
