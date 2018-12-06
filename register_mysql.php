@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username_err = "Please enter a username.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT id FROM users WHERE login = ?";
+        $sql = "SELECT id FROM players WHERE login = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -46,8 +46,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate password
     if(empty(trim($_POST['password']))){
         $password_err = "Please enter a password.";     
-    } elseif(strlen(trim($_POST['password'])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
+    } elseif(strlen(trim($_POST['password'])) < 1){
+        $password_err = "Password must have atleast 1 characters.";
     } else{
         $password = trim($_POST['password']);
     }
@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (login, password, fname, lname, age, gender, loc) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO players (login, password, fname, lname, age, gender, loc) VALUES (?, ?, ?, ?, ?, ?, ?)";
          //echo "outer pass";
         if($stmt = mysqli_prepare($link, $sql)){
             //echo "in pass";

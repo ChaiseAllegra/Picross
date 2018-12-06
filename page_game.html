@@ -4,7 +4,6 @@
 -->
 <!DOCTYPE html>
 <html lang="US-en">
-
 <head>
     <link rel="stylesheet" href="styleGame.css">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -23,6 +22,7 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ewert|Gravitas+One|Monoton" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet">
+    <?php require_once 'config_mysql.php'; ?>
 </head>
 
 <body id="game" onload="seven(); setTime();">
@@ -370,7 +370,7 @@
                 <button onclick="initTableAnsw();">Random</button>
             </li>
             <li>
-                <button onclick="arcade();" style="    font-family: bungee inline;color: #FF2C75;margin-top: 0%;font-weight: 400;">Arcade</button>
+                <button onclick="arcade();" style="font-family: bungee inline;color: #FF2C75;margin-top: 0%;font-weight: 400;">Arcade</button>
             </li>
             <li>
                 <button onclick="attack();" style="font-family: kumar one outline;font-weight: 700;color: #e0d219;">Attack</button>
