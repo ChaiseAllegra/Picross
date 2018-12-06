@@ -10,7 +10,7 @@
    
    echo 'Connected successfully <br>';
    
-   $sql = 'CREATE DATABASE yeet';
+   $sql = 'CREATE DATABASE IF NOT EXISTS yeet';
 
    $retval = mysqli_query( $conn, $sql );
 

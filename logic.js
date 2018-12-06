@@ -51,39 +51,57 @@ function setTime() {
 	arcadeLevelPassed[0] = false;
 	arcadeLevelPassed[1] = false;
 	arcadeLevelPassed[2] = false;
+	ajaxFunc();
 }
 function arcade() {
-	ajaxFunc();
+
 	
 	numElem = 0;
 	numTurns = 0;
 	doAttack = true;
-	if (arcadeLevelPassed[0] == false && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
-		level1();
+	loadLevel() ;
+	//if (arcadeLevelPassed[0] == false && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
+	//	level1();
 }
 function attack() {
 	numElem = 0;
 	numTurns = 0;
 	doAttack = true;
 	endTime = min + 1;
-	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
-	level1();
+	loadLevel();
+	//if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
+	//level1();
 	//need to add timeLevelPassed[1]=true; to the win condition
 }
 
 function ajaxFunc() {
-$.ajax({
-    url: "http://localhost/picross/database_init.php",
+	$.ajax({
+			url: "http://localhost/picross/database_init.php",
 
-    dataType: "jsonp",
-    success: function( response ) {
-        console.log( response ); // server response
-    }
-
-});
-
+			dataType: "jsonp",
+			success: function( response ) {
+				console.log( "yo mama" ); // server response
+				for (var i = 0; i < data.length; i++) {
+					alert(data[i].Name);
+				}
+			}
+			
+		});
 }
+function loadLevel() {
+	$.ajax({
+			url: "http://localhost/picross/levelLoad.php",
 
+			dataType: "jsonp",
+			success: function( response ) {
+				console.log( "yo mama" ); // server response
+				/*for (var i = 0; i < data.length; i++) {
+					alert(data[i].Name);
+				}*/
+			}
+			
+		});
+}
 function displayTips() {
 	tbl = document.getElementById("table");
 	for (var i = 0; i < rowTip.length; i++) {
