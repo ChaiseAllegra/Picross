@@ -25,30 +25,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
-<stript>
-    $(document).ready(function() {
-        $("#list").on("click", function() {
-            $.ajax({
-                url: "database_init.php"
-            }).done(function(data){
-                $(this).empty().append("<li>"+ data +"</li>");
-            });
-        });
-    });
-</stript>
-
 <body id="game" onload="seven(); setTime();">
-    <head>
-        <title></title>
-        <script type="text/javascript" src="logic.js"></script>
-    </head>
-    <body>
-        <ul id="list">
-            <!-- In here comes the data! -->
-        </ul>
-
-        <button id="button">Get Data</button>
-    </body>
     <header>
         <div id="headTop">
             <h1>Picross</h1>
