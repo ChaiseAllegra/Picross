@@ -33,25 +33,25 @@
 
     $retval2 = mysqli_query ( $conn, $sql2 );
 
-    $row1 = "INSERT INTO 1_7x7 (one,two,three,four,five,six,seven)
+    $row1 = "INSERT IGNORE INTO 1_7x7 (one,two,three,four,five,six,seven)
     VALUES (1, 0, 0, 0, 0, 0, 1);";
     mysqli_query($conn, $row1);
-    $row2 = "INSERT INTO 1_7x7 (one,two,three,four,five,six,seven)
+    $row2 = "INSERT IGNORE INTO 1_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 1, 0, 0, 0, 1, 0);";
     mysqli_query($conn, $row2);
-    $row3 = "INSERT INTO 1_7x7 (one,two,three,four,five,six,seven)
+    $row3 = "INSERT IGNORE INTO 1_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 1, 0, 1, 0, 0);";
     mysqli_query($conn, $row3);
-    $row4 = "INSERT INTO 1_7x7 (one,two,three,four,five,six,seven)
+    $row4 = "INSERT IGNORE INTO 1_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 0, 1, 0, 0, 0);";
     mysqli_query($conn, $row4);
-    $row5 = "INSERT INTO 1_7x7 (one,two,three,four,five,six,seven)
+    $row5 = "INSERT IGNORE INTO 1_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 1, 0, 1, 0, 0);";
     mysqli_query($conn, $row5);
-    $row6 = "INSERT INTO 1_7x7 (one,two,three,four,five,six,seven)
+    $row6 = "INSERT IGNORE INTO 1_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 1, 0, 0, 0, 1, 0);";
     mysqli_query($conn, $row6);
-    $row7 = "INSERT INTO 1_7x7 (one,two,three,four,five,six,seven)
+    $row7 = "INSERT IGNORE INTO 1_7x7 (one,two,three,four,five,six,seven)
     VALUES (1, 0, 0, 0, 0, 0, 1);";
     mysqli_query($conn, $row7);
 //-------------------------------------------------------------------------//
@@ -69,25 +69,25 @@
 
     $retval2 = mysqli_query ( $conn, $sql2 );
 
-    $row1 = "INSERT INTO 2_7x7 (one,two,three,four,five,six,seven)
+    $row1 = "INSERT IGNORE INTO 2_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 1, 0, 1, 0, 0);";
     mysqli_query($conn, $row1);
-    $row2 = "INSERT INTO 2_7x7 (one,two,three,four,five,six,seven)
+    $row2 = "INSERT IGNORE INTO 2_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 1, 0, 1, 0, 1, 0);";
     mysqli_query($conn, $row2);
-    $row3 = "INSERT INTO 2_7x7 (one,two,three,four,five,six,seven)
+    $row3 = "INSERT IGNORE INTO 2_7x7 (one,two,three,four,five,six,seven)
     VALUES (1, 1, 1, 1, 1, 1, 1);";
     mysqli_query($conn, $row3);
-    $row4 = "INSERT INTO 2_7x7 (one,two,three,four,five,six,seven)
+    $row4 = "INSERT IGNORE INTO 2_7x7 (one,two,three,four,five,six,seven)
     VALUES (1, 0, 0, 1, 0, 0, 1);";
     mysqli_query($conn, $row4);
-    $row5 = "INSERT INTO 2_7x7 (one,two,three,four,five,six,seven)
+    $row5 = "INSERT IGNORE INTO 2_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 1, 0, 0, 1, 0, 0);";
     mysqli_query($conn, $row5);
-    $row6 = "INSERT INTO 2_7x7 (one,two,three,four,five,six,seven)
+    $row6 = "INSERT IGNORE INTO 2_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 0, 1, 0, 1, 0);";
     mysqli_query($conn, $row6);
-    $row7 = "INSERT INTO 2_7x7 (one,two,three,four,five,six,seven)
+    $row7 = "INSERT IGNORE INTO 2_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 0, 1, 1, 0, 0);";
     mysqli_query($conn, $row7);
 //-------------------------------------------------------------------------//
@@ -105,25 +105,25 @@
 
     $retval2 = mysqli_query ( $conn, $sql2 );
 
-    $row1 = "INSERT INTO 3_7x7 (one,two,three,four,five,six,seven)
+    $row1 = "INSERT IGNORE INTO 3_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 0, 1, 0, 0, 1);";
     mysqli_query($conn, $row1);
-    $row2 = "INSERT INTO 3_7x7 (one,two,three,four,five,six,seven)
+    $row2 = "INSERT IGNORE INTO 3_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 1, 0, 1, 0, 0, 0);";
     mysqli_query($conn, $row2);
-    $row3 = "INSERT INTO 3_7x7 (one,two,three,four,five,six,seven)
+    $row3 = "INSERT IGNORE INTO 3_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 1, 1, 0, 0, 0);";
     mysqli_query($conn, $row3);
-    $row4 = "INSERT INTO 3_7x7 (one,two,three,four,five,six,seven)
+    $row4 = "INSERT IGNORE INTO 3_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 0, 1, 1, 0, 0);";
     mysqli_query($conn, $row4);
-    $row5 = "INSERT INTO 3_7x7 (one,two,three,four,five,six,seven)
+    $row5 = "INSERT IGNORE INTO 3_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 0, 1, 1, 0, 0, 0);";
     mysqli_query($conn, $row5);
-    $row6 = "INSERT INTO 3_7x7 (one,two,three,four,five,six,seven)
+    $row6 = "INSERT IGNORE INTO 3_7x7 (one,two,three,four,five,six,seven)
     VALUES (0, 1, 0, 1, 0, 0, 0);";
     mysqli_query($conn, $row6);
-    $row7 = "INSERT INTO 3_7x7 (one,two,three,four,five,six,seven)
+    $row7 = "INSERT IGNORE INTO 3_7x7 (one,two,three,four,five,six,seven)
     VALUES (1, 0, 0, 1, 0, 0, 0);";
     mysqli_query($conn, $row7);
 //-------------------------------------------------------------------------//
@@ -147,44 +147,44 @@ $sql2 = "CREATE TABLE IF NOT EXISTS 1_13x13 (
 
 $retval2 = mysqli_query ( $conn, $sql2 );
 
-$row1 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 0, 1, 0, 0, 1);";
+$row1 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row1);
-$row2 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 1, 0, 1, 0, 0, 0);";
+$row2 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row2);
-$row3 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 1, 1, 0, 0, 0);";
+$row3 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row3);
-$row4 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 0, 1, 1, 0, 0);";
+$row4 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row4);
-$row5 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 1, 1, 0, 0, 0);";
+$row5 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row5);
-$row6 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 1, 0, 1, 0, 0, 0);";
+$row6 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row6);
-$row7 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row7 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row7);
-$row8 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row8 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row8);
-$row9 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row9 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row9);
-$row10 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row10 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row10);
-$row11 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row11 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row11);
-$row12 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row12 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row12);
-$row13 = "INSERT INTO 1_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row13 = "INSERT IGNORE INTO 1_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, , 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row13);
 
 //-------------------------------------------------------------------------//
@@ -207,44 +207,44 @@ $sql2 = "CREATE TABLE IF NOT EXISTS 2_13x13 (
 
 $retval2 = mysqli_query ( $conn, $sql2 );
 
-$row1 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 0, 1, 0, 0, 1);";
+$row1 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row1);
-$row2 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 1, 0, 1, 0, 0, 0);";
+$row2 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row2);
-$row3 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 1, 1, 0, 0, 0);";
+$row3 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row3);
-$row4 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 0, 1, 1, 0, 0);";
+$row4 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row4);
-$row5 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 1, 1, 0, 0, 0);";
+$row5 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row5);
-$row6 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 1, 0, 1, 0, 0, 0);";
+$row6 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row6);
-$row7 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row7 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row7);
-$row8 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row8 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row8);
-$row9 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row9 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row9);
-$row10 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row10 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row10);
-$row11 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row11 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row11);
-$row12 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row12 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row12);
-$row13 = "INSERT INTO 2_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row13 = "INSERT IGNORE INTO 2_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, , 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row13);
 
 //-------------------------------------------------------------------------//
@@ -267,44 +267,44 @@ $sql2 = "CREATE TABLE IF NOT EXISTS 3_13x13 (
 
 $retval2 = mysqli_query ( $conn, $sql2 );
 
-$row1 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 0, 1, 0, 0, 1);";
+$row1 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row1);
-$row2 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 1, 0, 1, 0, 0, 0);";
+$row2 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row2);
-$row3 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 1, 1, 0, 0, 0);";
+$row3 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row3);
-$row4 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 0, 1, 1, 0, 0);";
+$row4 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row4);
-$row5 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 0, 1, 1, 0, 0, 0);";
+$row5 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row5);
-$row6 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (0, 1, 0, 1, 0, 0, 0);";
+$row6 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row6);
-$row7 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row7 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row7);
-$row8 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row8 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row8);
-$row9 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row9 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row9);
-$row10 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row10 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row10);
-$row11 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row11 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row11);
-$row12 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row12 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row12);
-$row13 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven)
-VALUES (1, 0, 0, 1, 0, 0, 0);";
+$row13 = "INSERT IGNORE INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen)
+VALUES (1, 0, 0, 1, 0, 0, , 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row13);
 //-------------------------------------------------------------------------//
 

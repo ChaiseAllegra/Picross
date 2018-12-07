@@ -40,7 +40,8 @@ var timeLevelPassed = [];
 var arcadeLevelPassed = [];
 var active13;
 var active7;
-var doTrans=[];
+var doTrans = []; //boolean array for attack
+var doTrans2 = []; //boolean array for arcade
 
 
 function setTime() {
@@ -51,27 +52,50 @@ function setTime() {
 	numElem = 0;
 	doAttack = false;
 	doArcade = false;
+	//
 	timeLevelPassed[0] = false;
 	timeLevelPassed[1] = false;
 	timeLevelPassed[2] = false;
+	//
 	arcadeLevelPassed[0] = false;
 	arcadeLevelPassed[1] = false;
 	arcadeLevelPassed[2] = false;
-	doTrans[0]=true;
-	doTrans[1]=true;
-	doTrans[2]=true;
-	doTrans[3]=true;
-	active13=false;
-	active7=true;
+	//
+	doTrans[0] = true;
+	doTrans[1] = true;
+	doTrans[2] = true;
+	doTrans[3] = true;
+	//
+	doTrans2[0] = true;
+	doTrans2[1] = true;
+	doTrans2[2] = true;
+	doTrans2[3] = true;
+	//
+	active13 = false;
+	active7 = true;
+	setDatabase();
+
+}
+function setDatabase() {
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost/picross/database_init.php',
+		dataType: "jsonp",
+		//data: {action: "yeet"},    
+		success: function (data) {
+			//console.log(data);
+			//it = JSON.parse(data);
+		}
+	});
 }
 function arcade() {
 	numElem = 0;
 	numTurns = 0;
 	doArcade = true;
-	doAttack=false;
-	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active7)
+	doAttack = false;
+	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active7)
 		loadLevel1();
-	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active13)
+	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active13)
 		loadLevel4();
 	createLevel();
 }
@@ -79,11 +103,11 @@ function attack() {
 	numElem = 0;
 	numTurns = 0;
 	doAttack = true;
-	doArcade=false;
+	doArcade = false;
 	endTime = min + 1;
-	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active7)
+	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active7)
 		loadLevel1();
-	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active13)
+	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active13)
 		loadLevel4();
 	createLevel();
 	//need to add timeLevelPassed[1]=true; to the win condition
@@ -94,21 +118,20 @@ function createLevel() {
 	numTurns = 0;
 	document.getElementById("turns").innerHTML = numTurns;
 	var tbl = document.getElementById("table");
-	var i=0;
+	var i = 0;
 	console.log(it[0]["one"]);
-	while(i<7)
-	{
+	while (i < 7) {
 		hitArr.push([]);
-		hitArr[i][0]=it[i]['one'];
-		hitArr[i][1]=it[i]['two'];
-		hitArr[i][2]=it[i]['three'];
-		hitArr[i][3]=it[i]['four'];
-		hitArr[i][4]=it[i]['five'];
-		hitArr[i][5]=it[i]['six'];
-		hitArr[i][6]=it[i]['seven'];
+		hitArr[i][0] = it[i]['one'];
+		hitArr[i][1] = it[i]['two'];
+		hitArr[i][2] = it[i]['three'];
+		hitArr[i][3] = it[i]['four'];
+		hitArr[i][4] = it[i]['five'];
+		hitArr[i][5] = it[i]['six'];
+		hitArr[i][6] = it[i]['seven'];
 		i++;
 	}
-	
+
 	for (var i = 0; i < tbl.rows.length - 1; i++) {
 		boolArr7.push([]);
 		rowTip.push([]);
@@ -117,7 +140,7 @@ function createLevel() {
 			boolArr7[i][j] = 0;
 			rowTip[i][j] = 0;
 			colTip[i][j] = 0;
-			if (hitArr[i][j]==1)//left side of X
+			if (hitArr[i][j] == 1)//left side of X
 			{
 				numElem++;
 				squareCount7++;
@@ -129,26 +152,25 @@ function createLevel() {
 	document.getElementById("elements").innerHTML = numElem;
 	/* -------------------- For 13x13 tables -------------------------*/
 	var tbl2 = document.getElementById("table2");
-	i=0;
-	while(i<13)
-	{
+	i = 0;
+	while (i < 13) {
 		hitArr2.push([]);
-		hitArr2[i][0]=it[i]['one'];
-		hitArr2[i][1]=it[i]['two'];
-		hitArr2[i][2]=it[i]['three'];
-		hitArr2[i][3]=it[i]['four'];
-		hitArr2[i][4]=it[i]['five'];
-		hitArr2[i][5]=it[i]['six'];
-		hitArr2[i][6]=it[i]['seven'];
-		hitArr2[i][7]=it[i]['eight'];
-		hitArr2[i][8]=it[i]['nine'];
-		hitArr2[i][9]=it[i]['ten'];
-		hitArr2[i][10]=it[i]['eleven'];
-		hitArr2[i][11]=it[i]['twelve'];
-		hitArr2[i][12]=it[i]['thirteen'];
+		hitArr2[i][0] = it[i]['one'];
+		hitArr2[i][1] = it[i]['two'];
+		hitArr2[i][2] = it[i]['three'];
+		hitArr2[i][3] = it[i]['four'];
+		hitArr2[i][4] = it[i]['five'];
+		hitArr2[i][5] = it[i]['six'];
+		hitArr2[i][6] = it[i]['seven'];
+		hitArr2[i][7] = it[i]['eight'];
+		hitArr2[i][8] = it[i]['nine'];
+		hitArr2[i][9] = it[i]['ten'];
+		hitArr2[i][10] = it[i]['eleven'];
+		hitArr2[i][11] = it[i]['twelve'];
+		hitArr2[i][12] = it[i]['thirteen'];
 		i++;
 	}
-	
+
 	for (var i = 0; i < tbl2.rows.length - 1; i++) {
 		boolArr13.push([]);
 		rowTip.push([]);
@@ -157,7 +179,7 @@ function createLevel() {
 			boolArr13[i][j] = 0;
 			rowTip[i][j] = 0;
 			colTip[i][j] = 0;
-			if (hitArr2[i][j]==1)//left side of X
+			if (hitArr2[i][j] == 1)//left side of X
 			{
 				numElem++;
 				squareCount13++;
@@ -171,34 +193,36 @@ function loadLevel1() {
 		type: 'GET',
 		url: 'http://localhost/picross/levelLoad.php',
 		//data: {action: "yeet"},    
-		success: function(data){
+		success: function (data) {
 			//console.log(data);
-			it=JSON.parse(data);
+			it = JSON.parse(data);
 		}
 	});
 }
 function loadLevel2() {
-$.ajax({
-	type: 'GET',
-	url: 'http://localhost/picross/levelLoad2.php',
-	//data: {action: "yeet"},    
-	success: function(data){
-		//console.log(data);
-		it=JSON.parse(data);
-		console.log(it);
-	}
-});
+	delete it;
+	$.ajax({
+		
+		type: 'GET',
+		url: 'http://localhost/picross/levelLoad2.php',
+		//data: {action: "yeet"},    
+		success: function (data) {
+			//console.log(data);
+			it = JSON.parse(data);
+			console.log(it);
+		}
+	});
 }
 function loadLevel3() {
-$.ajax({
-	type: 'GET',
-	url: 'http://localhost/picross/levelLoad3.php',
-	//data: {action: "yeet"},    
-	success: function(data){
-		//console.log(data);
-		it=JSON.parse(data);
-	}
-});
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost/picross/levelLoad3.php',
+		//data: {action: "yeet"},    
+		success: function (data) {
+			//console.log(data);
+			it = JSON.parse(data);
+		}
+	});
 }
 
 
@@ -208,33 +232,33 @@ function loadLevel4() {
 		type: 'GET',
 		url: 'http://localhost/picross/levelLoad4.php',
 		//data: {action: "yeet"},    
-		success: function(data){
+		success: function (data) {
 			//console.log(data);
-			it=JSON.parse(data);
+			it = JSON.parse(data);
 		}
 	});
 }
 function loadLevel5() {
-$.ajax({
-	type: 'GET',
-	url: 'http://localhost/picross/levelLoad5.php',
-	//data: {action: "yeet"},    
-	success: function(data){
-		//console.log(data);
-		it=JSON.parse(data);
-	}
-});
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost/picross/levelLoad5.php',
+		//data: {action: "yeet"},    
+		success: function (data) {
+			//console.log(data);
+			it = JSON.parse(data);
+		}
+	});
 }
 function loadLevel6() {
-$.ajax({
-	type: 'GET',
-	url: 'http://localhost/picross/levelLoad6.php',
-	//data: {action: "yeet"},    
-	success: function(data){
-		//console.log(data);
-		it=JSON.parse(data);
-	}
-});
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost/picross/levelLoad6.php',
+		//data: {action: "yeet"},    
+		success: function (data) {
+			//console.log(data);
+			it = JSON.parse(data);
+		}
+	});
 }
 function displayTips() {
 	tbl = document.getElementById("table");
@@ -265,66 +289,64 @@ function update() {
 	var x = setInterval(function () {
 		var i = 0;
 
-		if (doAttack&&active7) {
+		if (doAttack && active7) {
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false){
-					loadLevel2();
-					createLevel();
+			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false) {
+				loadLevel2();
+				createLevel();
 			}
-			
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false)
-			{
+
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false) {
 				loadLevel3();
 				createLevel();
 			}
-				
+
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
 				doAttack = false;
 		}
-		if (doAttack&&active13) {
+		if (doAttack && active13) {
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false){
-					loadLevel4();
-					createLevel();
+			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false) {
+				loadLevel4();
+				createLevel();
 			}
-			
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false)
-			{
+
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false) {
 				loadLevel5();
 				createLevel();
 			}
-				
+
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
 				doAttack = false;
 		}
 
-		if (doArcade&&active7) {
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
-			{
-					deleteTable();
-					loadLevel2();
-					createLevel();
-					addTips();
+		if (doArcade && active7) {
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false && doTrans[0]) {
+				doTrans[0] = false;
+				deleteTable();
+				loadLevel2();
+				createLevel();
+				addTips();
 			}
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false)
-				{
-					loadlevel3();
-					createLevel();
-				}
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false && doTrans[1]) {
+				doTrans[1] = false;
+				deleteTable();
+				loadlevel3();
+				createLevel();
+				addTips();
+			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
 				doArcade = false;
 		}
 
-		if (doArcade&&active13) {
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
-				{
-					loadlevel5();
-					createLevel();
-				}
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false)
-			{
+		if (doArcade && active13) {
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false) {
+				loadlevel5();
+				createLevel();
+			}
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false) {
 				loadlevel6();
 				createLevel();
 			}
@@ -477,7 +499,7 @@ function checkVictory() {
 				return;
 			}
 		}
-		alert("You Won! "+" Completion time: "+hour + " hours " + min + " minutes " + sec + " seconds");
+		alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 
 
 	}
@@ -600,14 +622,14 @@ function timer() {
 function seven() {
 	document.getElementById("tblCont2").style.display = "none";
 	document.getElementById("tblCont").style.display = "initial";
-	active13=false;
-	active7=true;
+	active13 = false;
+	active7 = true;
 }
 function thirteen() {
 	document.getElementById("tblCont").style.display = "none";
 	document.getElementById("tblCont2").style.display = "initial";
-	active13=true;
-	active7=false;
+	active13 = true;
+	active7 = false;
 }
 function gridColor(tmp) {
 	document.getElementsByTagName("table")[0].style.borderColor = tmp;
@@ -671,7 +693,7 @@ function addTips() {
 	console.log(rowTip);
 	console.log(colTip);
 }
-function level1() {console.log("wrong function");}
+function level1() { console.log("wrong function"); }
 function level2() {//creates a simley face :)
 	/* -------------------- For 7x7 tables -------------------------*/
 	numTurns = 0;
