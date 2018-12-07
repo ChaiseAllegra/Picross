@@ -41,6 +41,7 @@ var arcadeLevelPassed = [];
 var active13;
 var active7;
 
+
 function setTime() {
 	sec = 0;
 	min = 0;
@@ -56,16 +57,13 @@ function setTime() {
 	arcadeLevelPassed[1] = false;
 	arcadeLevelPassed[2] = false;
 	active13=false;
-	active7=false;
-	
-	ajaxFunc();
+	active7=true;
 }
 function arcade() {
 	numElem = 0;
 	numTurns = 0;
 	doArcade = true;
 	doAttack=false;
-	loadLevel() ;
 	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active7)
 		loadLevel1();
 	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active13)
@@ -78,7 +76,6 @@ function attack() {
 	doAttack = true;
 	doArcade=false;
 	endTime = min + 1;
-	loadLevel();
 	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active7)
 		loadLevel1();
 	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active13)
@@ -86,22 +83,6 @@ function attack() {
 	createLevel();
 	//need to add timeLevelPassed[1]=true; to the win condition
 }
-
-function ajaxFunc() {
-	$.ajax({
-			url: "http://localhost/picross/database_init.php",
-
-			dataType: "jsonp",
-			success: function( response ) {
-				console.log( "yo mama" ); // server response
-				for (var i = 0; i < data.length; i++) {
-					alert(data[i].Name);
-				}
-			}
-			
-		});
-}
-
 
 function createLevel() {
 	/* -------------------- For 7x7 tables -------------------------*/
@@ -194,18 +175,19 @@ function loadLevel1() {
 function loadLevel2() {
 $.ajax({
 	type: 'GET',
-	url: 'http://localhost/picross/levelLoad.php',
+	url: 'http://localhost/picross/levelLoad2.php',
 	//data: {action: "yeet"},    
 	success: function(data){
 		//console.log(data);
 		it=JSON.parse(data);
+		console.log(it);
 	}
 });
 }
 function loadLevel3() {
 $.ajax({
 	type: 'GET',
-	url: 'http://localhost/picross/levelLoad.php',
+	url: 'http://localhost/picross/levelLoad3.php',
 	//data: {action: "yeet"},    
 	success: function(data){
 		//console.log(data);
@@ -219,7 +201,7 @@ $.ajax({
 function loadLevel4() {
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/picross/levelLoad.php',
+		url: 'http://localhost/picross/levelLoad4.php',
 		//data: {action: "yeet"},    
 		success: function(data){
 			//console.log(data);
@@ -230,7 +212,7 @@ function loadLevel4() {
 function loadLevel5() {
 $.ajax({
 	type: 'GET',
-	url: 'http://localhost/picross/levelLoad.php',
+	url: 'http://localhost/picross/levelLoad5.php',
 	//data: {action: "yeet"},    
 	success: function(data){
 		//console.log(data);
@@ -241,7 +223,7 @@ $.ajax({
 function loadLevel6() {
 $.ajax({
 	type: 'GET',
-	url: 'http://localhost/picross/levelLoad.php',
+	url: 'http://localhost/picross/levelLoad6.php',
 	//data: {action: "yeet"},    
 	success: function(data){
 		//console.log(data);
@@ -315,18 +297,30 @@ function update() {
 
 		if (doArcade&&active7) {
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
-				loadlevel2();
+			{
+					loadLevel2();
+					createLevel();
+			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false)
-				loadlevel3();
+				{
+					loadlevel3();
+					createLevel();
+				}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
 				doArcade = false;
 		}
 
 		if (doArcade&&active13) {
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
-				loadlevel5();
+				{
+					loadlevel5();
+					createLevel();
+				}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false)
+			{
 				loadlevel6();
+				createLevel();
+			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
 				doArcade = false;
 		}
