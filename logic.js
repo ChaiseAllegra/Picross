@@ -40,6 +40,7 @@ var timeLevelPassed = [];
 var arcadeLevelPassed = [];
 var active13;
 var active7;
+var doTrans=[];
 
 
 function setTime() {
@@ -56,6 +57,10 @@ function setTime() {
 	arcadeLevelPassed[0] = false;
 	arcadeLevelPassed[1] = false;
 	arcadeLevelPassed[2] = false;
+	doTrans[0]=true;
+	doTrans[1]=true;
+	doTrans[2]=true;
+	doTrans[3]=true;
 	active13=false;
 	active7=true;
 }
