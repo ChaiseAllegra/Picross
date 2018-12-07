@@ -298,8 +298,10 @@ function update() {
 		if (doArcade&&active7) {
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
 			{
+					deleteTable();
 					loadLevel2();
 					createLevel();
+					addTips();
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false)
 				{
