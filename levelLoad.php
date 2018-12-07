@@ -7,7 +7,7 @@
    
    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbdata);//connect
 
-   if(! $conn ) die('Could not connect: \n' . mysqli_error()); else echo 'Connected successfully <br>';
+   //if(! $conn ) die('Could not connect: \n' . mysqli_error()); //else echo 'Connected successfully <br>';
 
    $retval = mysqli_query( $conn, $sql );
 
@@ -18,11 +18,11 @@
     $data[] = $row;
    }
 
-   $tmp = json_encode($data);
-   
-   echo $tmp . "<br>";
+   $tmp = json_encode($data); 
+   //echo $tmp . "<br>";
 
-   if($retval) echo("query success <br>"); else echo 'query failed';
-   
+   echo $tmp;
+
+   /*if($retval) echo("query success <br>"); else echo 'query failed';*/
    mysqli_close($conn);
 ?>

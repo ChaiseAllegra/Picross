@@ -8,7 +8,7 @@
       die('Could not connect: \n' . mysqli_error());
    }
    
-   echo 'Connected successfully <br>';
+   //echo 'Connected successfully <br>';
    
    $sql = 'CREATE DATABASE IF NOT EXISTS yeet';
 
@@ -17,11 +17,11 @@
    $dbdata = "yeet";
    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbdata);
 
-    if(! $conn ) {
+   /* if(! $conn ) {
         die('Could not connect 2: <br>' . mysqli_error());
-    }
+    }*/
 //---------------------------------LEVEL 1 7x7-----------------------------//
-   $sql2 = "CREATE TABLE 1_7x7 (
+   $sql2 = "CREATE TABLE IF NOT EXISTS 1_7x7 (
             one INT NOT NULL,
             two INT NOT NULL,
             three INT NOT NULL,
@@ -57,7 +57,7 @@
 //-------------------------------------------------------------------------//
 
 //---------------------------------LEVEL 2 7x7-----------------------------//
-    $sql2 = "CREATE TABLE 2_7x7 (
+    $sql2 = "CREATE TABLE IF NOT EXISTS 2_7x7 (
         one INT NOT NULL,
         two INT NOT NULL,
         three INT NOT NULL,
@@ -93,7 +93,7 @@
 //-------------------------------------------------------------------------//
 
 //---------------------------------LEVEL 3 7x7-----------------------------//
-    $sql2 = "CREATE TABLE 3_7x7 (
+    $sql2 = "CREATE TABLE IF NOT EXISTS 3_7x7 (
         one INT NOT NULL,
         two INT NOT NULL,
         three INT NOT NULL,
@@ -129,7 +129,7 @@
 //-------------------------------------------------------------------------//
 
 //---------------------------------LEVEL 1 13x13---------------------------//
-$sql2 = "CREATE TABLE 1_13x13 (
+$sql2 = "CREATE TABLE IF NOT EXISTS 1_13x13 (
     one INT NOT NULL,
     two INT NOT NULL,
     three INT NOT NULL,
@@ -183,7 +183,7 @@ mysqli_query($conn, $row13);
 
 //-------------------------------------------------------------------------//
 //---------------------------------LEVEL 2 13x13------------------------------//
-$sql2 = "CREATE TABLE 2_13x13 (
+$sql2 = "CREATE TABLE IF NOT EXISTS 2_13x13 (
     one INT NOT NULL,
     two INT NOT NULL,
     three INT NOT NULL,
@@ -237,7 +237,7 @@ mysqli_query($conn, $row13);
 
 //-------------------------------------------------------------------------//
 //---------------------------------LEVEL 2 13x13------------------------------//
-$sql2 = "CREATE TABLE 3_13x13 (
+$sql2 = "CREATE TABLE IF NOT EXISTS 3_13x13 (
     one INT NOT NULL,
     two INT NOT NULL,
     three INT NOT NULL,
@@ -290,7 +290,7 @@ VALUES (1, 0, 0, 1, 0, 0, 0);";
 mysqli_query($conn, $row13);
 //-------------------------------------------------------------------------//
 
-if($retval)
+/*if($retval)
         echo("Success db <br>");
 
     if($retval2)
@@ -301,6 +301,6 @@ if($retval)
         die('Could not create database: <br>' . mysqli_error(0));
     }
    
-   echo "Database yeet created successfully\n";
+   echo "Database yeet created successfully\n";*/
    mysqli_close($conn);
 ?>
