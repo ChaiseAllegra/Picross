@@ -89,12 +89,14 @@ function ajaxFunc() {
 		});
 }
 function loadLevel() {
+	//var array = JSON.parse(my_JSON)
 	$.ajax({
 			url: "http://localhost/picross/levelLoad.php",
-
-			dataType: "jsonp",
+			type: 'GET',
+			data: 1,
+			dataType: "json",
 			success: function( response ) {
-				console.log( "yo mama" ); // server response
+				console.log( response['tmp'] ); // server response
 				/*for (var i = 0; i < data.length; i++) {
 					alert(data[i].Name);
 				}*/
