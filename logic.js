@@ -21,6 +21,7 @@ var hitArrLvL2a = [];
 var hitArrLvL2b = [];
 var hitArrLvL3a = [];
 var hitArrLvL3b = [];
+var isLevel7;
 
 /* ------------- Variables for displaying --------------- */
 var rowTip = [];
@@ -37,6 +38,8 @@ var doAttack;
 var doArcade;
 var timeLevelPassed = [];
 var arcadeLevelPassed = [];
+var active13;
+var active7;
 
 function setTime() {
 	sec = 0;
@@ -52,26 +55,35 @@ function setTime() {
 	arcadeLevelPassed[0] = false;
 	arcadeLevelPassed[1] = false;
 	arcadeLevelPassed[2] = false;
+	active13=false;
+	active7=false;
+	
 	ajaxFunc();
 }
 function arcade() {
-
-	
 	numElem = 0;
 	numTurns = 0;
-	doAttack = true;
+	doArcade = true;
+	doAttack=false;
 	loadLevel() ;
-	//if (arcadeLevelPassed[0] == false && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
-		level1();
+	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active7)
+		loadLevel1();
+	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active13)
+		loadLevel4();
+	createLevel();
 }
 function attack() {
 	numElem = 0;
 	numTurns = 0;
 	doAttack = true;
+	doArcade=false;
 	endTime = min + 1;
 	loadLevel();
-	//if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false)
-	//level1();
+	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active7)
+		loadLevel1();
+	if(timeLevelPassed[0]==false&&timeLevelPassed[1]==false&&timeLevelPassed[2]==false&&active13)
+		loadLevel4();
+	createLevel();
 	//need to add timeLevelPassed[1]=true; to the win condition
 }
 
@@ -90,19 +102,153 @@ function ajaxFunc() {
 		});
 }
 
-function loadLevel() {
-		$.ajax({
-            type: 'GET',
-            url: 'http://localhost/picross/levelLoad.php',
-            //data: {action: "yeet"},    
-            success: function(data){
-				//console.log(data);
-				it=JSON.parse(data);
-				console.log(it[0]['one']);
+
+function createLevel() {
+	/* -------------------- For 7x7 tables -------------------------*/
+	numTurns = 0;
+	document.getElementById("turns").innerHTML = numTurns;
+	var tbl = document.getElementById("table");
+	var i=0;
+	console.log(it[0]["one"]);
+	while(i<7)
+	{
+		hitArr.push([]);
+		hitArr[i][0]=it[i]['one'];
+		hitArr[i][1]=it[i]['two'];
+		hitArr[i][2]=it[i]['three'];
+		hitArr[i][3]=it[i]['four'];
+		hitArr[i][4]=it[i]['five'];
+		hitArr[i][5]=it[i]['six'];
+		hitArr[i][6]=it[i]['seven'];
+		i++;
+	}
+	
+	for (var i = 0; i < tbl.rows.length - 1; i++) {
+		boolArr7.push([]);
+		rowTip.push([]);
+		colTip.push([]);
+		for (var j = 0; j < tbl.rows[i].cells.length - 1; j++) {
+			boolArr7[i][j] = 0;
+			rowTip[i][j] = 0;
+			colTip[i][j] = 0;
+			if (hitArr[i][j]==1)//left side of X
+			{
+				numElem++;
+				squareCount7++;
 			}
-		});
+		}
+	}
+
+
+	document.getElementById("elements").innerHTML = numElem;
+	/* -------------------- For 13x13 tables -------------------------*/
+	var tbl2 = document.getElementById("table2");
+	i=0;
+	while(i<13)
+	{
+		hitArr2.push([]);
+		hitArr2[i][0]=it[i]['one'];
+		hitArr2[i][1]=it[i]['two'];
+		hitArr2[i][2]=it[i]['three'];
+		hitArr2[i][3]=it[i]['four'];
+		hitArr2[i][4]=it[i]['five'];
+		hitArr2[i][5]=it[i]['six'];
+		hitArr2[i][6]=it[i]['seven'];
+		hitArr2[i][7]=it[i]['eight'];
+		hitArr2[i][8]=it[i]['nine'];
+		hitArr2[i][9]=it[i]['ten'];
+		hitArr2[i][10]=it[i]['eleven'];
+		hitArr2[i][11]=it[i]['twelve'];
+		hitArr2[i][12]=it[i]['thirteen'];
+		i++;
+	}
+	
+	for (var i = 0; i < tbl2.rows.length - 1; i++) {
+		boolArr13.push([]);
+		rowTip.push([]);
+		colTip.push([]);
+		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
+			boolArr13[i][j] = 0;
+			rowTip[i][j] = 0;
+			colTip[i][j] = 0;
+			if (hitArr2[i][j]==1)//left side of X
+			{
+				numElem++;
+				squareCount13++;
+			}
+		}
+	}
+	document.getElementById("elements").innerHTML = numElem;
+}
+function loadLevel1() {
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost/picross/levelLoad.php',
+		//data: {action: "yeet"},    
+		success: function(data){
+			//console.log(data);
+			it=JSON.parse(data);
+		}
+	});
+}
+function loadLevel2() {
+$.ajax({
+	type: 'GET',
+	url: 'http://localhost/picross/levelLoad.php',
+	//data: {action: "yeet"},    
+	success: function(data){
+		//console.log(data);
+		it=JSON.parse(data);
+	}
+});
+}
+function loadLevel3() {
+$.ajax({
+	type: 'GET',
+	url: 'http://localhost/picross/levelLoad.php',
+	//data: {action: "yeet"},    
+	success: function(data){
+		//console.log(data);
+		it=JSON.parse(data);
+	}
+});
 }
 
+
+
+function loadLevel4() {
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost/picross/levelLoad.php',
+		//data: {action: "yeet"},    
+		success: function(data){
+			//console.log(data);
+			it=JSON.parse(data);
+		}
+	});
+}
+function loadLevel5() {
+$.ajax({
+	type: 'GET',
+	url: 'http://localhost/picross/levelLoad.php',
+	//data: {action: "yeet"},    
+	success: function(data){
+		//console.log(data);
+		it=JSON.parse(data);
+	}
+});
+}
+function loadLevel6() {
+$.ajax({
+	type: 'GET',
+	url: 'http://localhost/picross/levelLoad.php',
+	//data: {action: "yeet"},    
+	success: function(data){
+		//console.log(data);
+		it=JSON.parse(data);
+	}
+});
+}
 function displayTips() {
 	tbl = document.getElementById("table");
 	for (var i = 0; i < rowTip.length; i++) {
@@ -132,22 +278,55 @@ function update() {
 	var x = setInterval(function () {
 		var i = 0;
 
-		if (doAttack) {
+		if (doAttack&&active7) {
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false)
-				level2();
+			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false){
+					loadLevel2();
+					createLevel();
+			}
+			
 
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false)
-				level3();
+			{
+				loadLevel3();
+				createLevel();
+			}
+				
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
+				doAttack = false;
+		}
+		if (doAttack&&active13) {
+
+			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false){
+					loadLevel4();
+					createLevel();
+			}
+			
+
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false)
+			{
+				loadLevel5();
+				createLevel();
+			}
+				
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
 				doAttack = false;
 		}
 
-		if (doArcade) {
+		if (doArcade&&active7) {
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
-				level2();
+				loadlevel2();
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false)
-				level3();
+				loadlevel3();
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
+				doArcade = false;
+		}
+
+		if (doArcade&&active13) {
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false)
+				loadlevel5();
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false)
+				loadlevel6();
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
 				doArcade = false;
 		}
@@ -297,7 +476,7 @@ function checkVictory() {
 				return;
 			}
 		}
-		alert("Level Complete!");
+		alert("You Won! "+" Completion time: "+hour + " hours " + min + " minutes " + sec + " seconds");
 
 
 	}
@@ -420,10 +599,14 @@ function timer() {
 function seven() {
 	document.getElementById("tblCont2").style.display = "none";
 	document.getElementById("tblCont").style.display = "initial";
+	active13=false;
+	active7=true;
 }
 function thirteen() {
 	document.getElementById("tblCont").style.display = "none";
 	document.getElementById("tblCont2").style.display = "initial";
+	active13=true;
+	active7=false;
 }
 function gridColor(tmp) {
 	document.getElementsByTagName("table")[0].style.borderColor = tmp;
@@ -487,103 +670,7 @@ function addTips() {
 	console.log(rowTip);
 	console.log(colTip);
 }
-
-function level1() {//creates an X
-	/* -------------------- For 7x7 tables -------------------------*/
-	//console.log(it[0]);
-	numTurns = 0;
-	document.getElementById("turns").innerHTML = numTurns;
-	var tbl = document.getElementById("table");
-	var i=0;
-	console.log(it[0]["one"]);
-	while(i<7)
-	{
-		hitArr.push([]);
-		hitArr[i][0]=it[i]['one'];
-		hitArr[i][1]=it[i]['two'];
-		hitArr[i][2]=it[i]['three'];
-		hitArr[i][3]=it[i]['four'];
-		hitArr[i][4]=it[i]['five'];
-		hitArr[i][5]=it[i]['six'];
-		hitArr[i][6]=it[i]['seven'];
-		i++;
-	}
-	
-	for (var i = 0; i < tbl.rows.length - 1; i++) {
-		boolArr7.push([]);
-		rowTip.push([]);
-		colTip.push([]);
-		for (var j = 0; j < tbl.rows[i].cells.length - 1; j++) {
-			boolArr7[i][j] = 0;
-			rowTip[i][j] = 0;
-			colTip[i][j] = 0;
-			if (hitArr[i][j]==1)//left side of X
-			{
-				numElem++;
-				squareCount7++;
-			}
-		}
-	}
-
-
-	document.getElementById("elements").innerHTML = numElem;
-	/* -------------------- For 13x13 tables -------------------------*/
-	/*var tbl2 = document.getElementById("table2");
-	for (var i = 0; i < tbl2.rows.length - 1; i++) {
-		hitArr2.push([]);
-		boolArr7.push([]);
-		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
-			boolArr7[i][j] = 0;
-			if (i == j)//left side of X
-				hitArr2[i][j] = 1;
-			else if ((j + i) == 12)//right side of X
-				hitArr2[i][j] = 1;
-			else
-				hitArr2[i][j] = 0;
-		}
-	}
-	for (var i = 0; i < tbl2.rows.length - 1; i++) {
-		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
-			if (hitArr2[i][j] == "1") {
-				tbl2.rows[i].cells[j].style.backgroundColor = "";
-			}
-		}
-	}*/
-	numTurns = 0;
-	document.getElementById("turns").innerHTML = numTurns;
-	var tbl = document.getElementById("table");
-	var i=0;
-	console.log(it[0]["one"]);
-	while(i<7)
-	{
-		hitArr.push([]);
-		hitArr[i][0]=it[i]['one'];
-		hitArr[i][1]=it[i]['two'];
-		hitArr[i][2]=it[i]['three'];
-		hitArr[i][3]=it[i]['four'];
-		hitArr[i][4]=it[i]['five'];
-		hitArr[i][5]=it[i]['six'];
-		hitArr[i][6]=it[i]['seven'];
-		i++;
-	}
-	
-	for (var i = 0; i < tbl.rows.length - 1; i++) {
-		boolArr7.push([]);
-		rowTip.push([]);
-		colTip.push([]);
-		for (var j = 0; j < tbl.rows[i].cells.length - 1; j++) {
-			boolArr7[i][j] = 0;
-			rowTip[i][j] = 0;
-			colTip[i][j] = 0;
-			if (hitArr[i][j]==1)//left side of X
-			{
-				numElem++;
-				squareCount7++;
-			}
-		}
-	}
-
-}
+function level1() {console.log("wrong function");}
 function level2() {//creates a simley face :)
 	/* -------------------- For 7x7 tables -------------------------*/
 	numTurns = 0;

@@ -3,13 +3,18 @@
    $dbuser = 'DeathOnADinosaur';
    $dbpass = 'password';
    $dbdata = "yeet";
-   $sql="SELECT * FROM 1_7x7";       
+   $one7="SELECT * FROM 1_7x7";
+   $two7="SELECT * FROM 2_7x7";  
+   $three7="SELECT * FROM 3_7x7";  
+   $one13="SELECT * FROM 1_13x13";
+   $two13="SELECT * FROM 2_13x13";  
+   $three13="SELECT * FROM 3_13x13";                   
    
    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbdata);//connect
 
    //if(! $conn ) die('Could not connect: \n' . mysqli_error()); //else echo 'Connected successfully <br>';
 
-   $retval = mysqli_query( $conn, $sql );
+   $retval = mysqli_query( $conn, $one7 );
 
    $data = array();
    //$data=mysqli_fetch_array($retval);//json_encode ($retval);

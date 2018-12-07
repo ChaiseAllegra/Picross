@@ -137,6 +137,12 @@ $sql2 = "CREATE TABLE IF NOT EXISTS 1_13x13 (
     five INT NOT NULL,
     six INT NOT NULL,
     seven INT NOT NULL
+    eight INT NOT NULL,
+    nine INT NOT NULL,
+    ten INT NOT NULL,
+    eleven INT NOT NULL,
+    twelve INT NOT NULL,
+    thirteen INT NOT NULL,
 )";
 
 $retval2 = mysqli_query ( $conn, $sql2 );
@@ -191,6 +197,12 @@ $sql2 = "CREATE TABLE IF NOT EXISTS 2_13x13 (
     five INT NOT NULL,
     six INT NOT NULL,
     seven INT NOT NULL
+    eight INT NOT NULL,
+    nine INT NOT NULL,
+    ten INT NOT NULL,
+    eleven INT NOT NULL,
+    twelve INT NOT NULL,
+    thirteen INT NOT NULL,
 )";
 
 $retval2 = mysqli_query ( $conn, $sql2 );
@@ -245,6 +257,12 @@ $sql2 = "CREATE TABLE IF NOT EXISTS 3_13x13 (
     five INT NOT NULL,
     six INT NOT NULL,
     seven INT NOT NULL
+    eight INT NOT NULL,
+    nine INT NOT NULL,
+    ten INT NOT NULL,
+    eleven INT NOT NULL,
+    twelve INT NOT NULL,
+    thirteen INT NOT NULL,
 )";
 
 $retval2 = mysqli_query ( $conn, $sql2 );
