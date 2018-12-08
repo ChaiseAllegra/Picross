@@ -2,7 +2,7 @@
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
 //phpinfo();
-define('DB_SERVER', '10.62.79.43');
+define('DB_SERVER', '10.62.70.129');
 define('DB_USERNAME', 'DeathOnADinosaur');
 define('DB_PASSWORD', 'password');
 define('DB_NAME', 'yeet'); 
