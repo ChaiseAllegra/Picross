@@ -8,11 +8,12 @@
 
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbdata);
 
-    $parameter= $_POST['score'];
+    $score=  $_POST['score'];
+    $usersname = $_SESSION['username']
     //$decoded = json_decode($parameter, true);
-    echo ("ji");
+    echo ($parameter);
 
-    $sql = "INSERT INTO high_scores7x7 (player) VALUES ($parameter);";   
+    $sql = "INSERT INTO `high_scores7x7`(`player`, `score`) VALUES ('$usersname','$score')";   
     $retval = mysqli_query( $conn, $sql );
 
 ?>

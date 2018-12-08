@@ -17,6 +17,7 @@
    $dbdata = "yeet";
    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbdata);
 
+
    /* if(! $conn ) {
         die('Could not connect 2: <br>' . mysqli_error());
     }*/
@@ -345,6 +346,24 @@ $retval=mysqli_query($conn,$sql);
         die('Could not create database: <br>' . mysqli_error(0));
     }
    
+
    echo "Database yeet created successfully\n";*/
+   $sql="CREATE TABLE IF NOT EXISTS players (
+    login varchar(100),
+    password varchar(100),
+    fname varchar(100),
+    lname varchar(100),
+    age INT NOT NULL,
+    gender varchar(100),
+    loc varchar(100)
+    )";
+    $retval=mysqli_query($conn,$sql);
+
    mysqli_close($conn);
 ?>
+
+$firstname = trim($_POST["fname"]);
+    $lastname = trim($_POST["lname"]);
+    $age = trim($_POST["age"]);
+    $gender = trim($_POST["gender"]);
+    $location = trim($_POST["loc"]);

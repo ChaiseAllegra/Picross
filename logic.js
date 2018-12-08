@@ -569,15 +569,16 @@ function checkAns(cel) {
 	console.log("numElem:", numElem);
 	console.log("SquareCount7:", squareCount7);*/
 	checkVictory();
-	var post = {'score' : 'Jas'};
-	var jpost = JSON.stringify(post);
+	var post = "luke";
 	$.ajax({
 		url: 'http://localhost/picross/gameScores.php',
-		data: {score: 'jas'},
+		data: {score: min },
 		type: 'post',
-		dataType: 'json',
 		success: function(output) { alert("success", output);},
-		error: function(request, status, error){alert("fail", request);}
+		error: function(xhr, textStatus, error){
+			alert(xhr.statusText);
+			alert(textStatus);
+			alert(error);}
 	});
 }
 

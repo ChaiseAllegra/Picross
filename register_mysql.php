@@ -69,7 +69,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $sql = "INSERT INTO players (login, password, fname, lname, age, gender, loc) VALUES (?, ?, ?, ?, ?, ?, ?)";
          //echo "outer pass";
         if($stmt = mysqli_prepare($link, $sql)){
-            //echo "in pass";
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sssssss", $param_username, $param_password, $firstname, $lastname, $age, $gender, $location);
             
@@ -125,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username:<sup>*</sup></label>
-                <input style="margin-left:3%;"type="text" name="username" value="<?php echo $username; ?>">
+                <input style="margin-left:3%;" type="username" name="username" value="<?php echo $username; ?>">
                 <span><?php echo $username_err; ?></span>
             </div>    
             <div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
