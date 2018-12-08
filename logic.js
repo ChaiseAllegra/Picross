@@ -94,10 +94,19 @@ function arcade() {
 	doArcade = true;
 	doAttack = false;
 	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active7)
+	{
+		deleteTable();
 		loadLevel1();
+	}
+		
 	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active13)
+	{
+		deleteTable();
 		loadLevel4();
+	}
 	createLevel();
+	addTips();
+	displayTips();
 }
 function attack() {
 	numElem = 0;
@@ -115,6 +124,7 @@ function attack() {
 
 function createLevel() {
 	/* -------------------- For 7x7 tables -------------------------*/
+	numElem = 0;
 	numTurns = 0;
 	document.getElementById("turns").innerHTML = numTurns;
 	var tbl = document.getElementById("table");
@@ -140,14 +150,15 @@ function createLevel() {
 			boolArr7[i][j] = 0;
 			rowTip[i][j] = 0;
 			colTip[i][j] = 0;
-			if (hitArr[i][j] == 1)//left side of X
+			if (hitArr[i][j] == "1")//left side of X
 			{
 				numElem++;
 				squareCount7++;
 			}
 		}
 	}
-
+	addTips();
+	displayTips();
 
 	document.getElementById("elements").innerHTML = numElem;
 	/* -------------------- For 13x13 tables -------------------------*/
@@ -189,6 +200,7 @@ function createLevel() {
 	document.getElementById("elements").innerHTML = numElem;
 }
 function loadLevel1() {
+	delete it;
 	$.ajax({
 		type: 'GET',
 		url: 'http://localhost/picross/levelLoad.php',
@@ -327,15 +339,15 @@ function update() {
 				doTrans[0] = false;
 				deleteTable();
 				loadLevel2();
+				console.log("Moving on to level 2");
 				createLevel();
-				addTips();
+				
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false && doTrans[1]) {
 				doTrans[1] = false;
 				deleteTable();
 				loadlevel3();
 				createLevel();
-				addTips();
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
 				doArcade = false;
@@ -380,8 +392,12 @@ function createTable(rowSize, colSize) {
 }
 
 function deleteTable() {
+	squareCount7 = 0;
+	numElem = 0;
+	numTurns = 0;
 	document.getElementsByTagName("table")[0];
 	var x = document.getElementsByClassName("content");
+	delTips();
 	for (var i = 0; i < x.length; i++) {
 		var item = x[i];
 		item.style.backgroundColor = "rgba(170, 170, 170, 0.4)";
@@ -409,6 +425,7 @@ function cellClick() {
 }
 
 function checkAns(cel) {
+	
 	/* -------------------- For 7x7 tables -------------------------*/
 	if (cel.parentNode.parentNode.parentNode.id == "table") {
 		var num = cel.id.split('');
@@ -456,6 +473,9 @@ function checkAns(cel) {
 			//cel.style.boxShadow = "0 0 5px 2px rgba(170, 170, 170, 0.4) inset";
 		}
 	}
+	console.log("hitCount7:", hitCount7);
+	console.log("numElem:", numElem);
+	console.log("SquareCount7:", squareCount7);
 	checkVictory();
 }
 
@@ -485,16 +505,19 @@ function checkVictory() {
 		if (doArcade) {
 			if (arcadeLevelPassed[0] == false && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false) {
 				arcadeLevelPassed[0] = true;
+				console.log("level 1 passed");
 				hitCount7 = 0;
 				return;
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false) {
 				arcadeLevelPassed[1] = true;
+				console.log("level 2 passed");
 				hitCount7 = 0;
 				return;
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false) {
 				arcadeLevelPassed[2] = true;
+				console.log("level 3 passed");
 				hitCount7 = 0;
 				return;
 			}
@@ -693,6 +716,29 @@ function addTips() {
 	console.log(rowTip);
 	console.log(colTip);
 }
+
+function delTips()
+{
+	document.getElementsByTagName("table");
+	var row = document.getElementsByClassName("rowLabel");
+	var col = document.getElementsByClassName("colLabel");
+	var itemRow;
+	var itemCol;
+
+	for (var i = 0; i < row.length; i++) {
+		itemRow = row[i];
+		itemRow.innerHTML = "";
+	}
+	for (var i = 0; i < col.length; i++) {
+		itemCol = col[i];
+		itemCol.innerHTML = "";
+	}
+
+	console.log("Attempted to delete tips");
+	delete colTip;
+	delete rowTip;
+}
+
 function level1() { console.log("wrong function"); }
 function level2() {//creates a simley face :)
 	/* -------------------- For 7x7 tables -------------------------*/
