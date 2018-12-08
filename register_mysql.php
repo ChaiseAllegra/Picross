@@ -19,14 +19,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username_err = "Please enter a username.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT id FROM players WHERE login = ?";
+        $sql = "SELECT login FROM players WHERE login = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             // Set parameters
             $param_username = trim($_POST["username"]);  
-            //echo $param_username;      
+            echo $param_username;      
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 /* store result */
@@ -60,10 +60,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($password != $confirm_password){
             $confirm_password_err = 'Password did not match.';
         }
-    }
-    
+    } 
+ 
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err)&& empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
         $sql = "INSERT INTO players (login, password, fname, lname, age, gender, loc) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -122,16 +122,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <article>Sign up</article>
         <hr>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
             <div <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username:<sup>*</sup></label>
-                <input style="margin-left:3%;" type="username" name="username" value="<?php echo $username; ?>">
+                <input style="margin-left:3%;" name="username" value="<?php echo $username; ?>">
                 <span><?php echo $username_err; ?></span>
             </div>    
+
             <div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password:<sup>*</sup></label>
                 <input style="margin-left:4.5%;" style="margin-left:1.5%;"type="password" name="password" value="<?php echo $password; ?>">
                 <span><?php echo $password_err; ?></span>
             </div>
+
             <div <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
                 <label>Confirm:<sup>*</sup></label>
                 <input style="margin-left:9%;"type="password" name="confirm_password" value="<?php echo $confirm_password; ?>">
@@ -162,7 +165,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            
             <div>
 
-            <div id="registerButtons">
+            <div id="registerButtons"> 
 
                 <input type="submit" value="Submit">
                 <input type="reset"  value="Reset">

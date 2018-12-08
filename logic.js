@@ -10,6 +10,19 @@ var hitCount7 = 0;
 var squareCount13 = 0;
 var hitCount13 = 0;
 
+//---Score tracking Variables
+var randomScore7 = 0;
+var randomMisses7 = 0;  //Holds how many times a player missed in random 7x7 mode
+var attackScore7 = 0;
+var arcadeScore7 = 0;
+var gameMode;
+var attackMisses7 = 0;//Holds how many times a player missed in attack 7x7 mode
+var attackEmpty7 = 0; //Hows the total amount of wrong "x" tiles available in attack 7x7 mode
+var arcadeMisses7 = 0;//Holds how many times a player missed in arcade 7x7 mode
+var arcadeEmpty7 = 0;//Hows the total amount of wrong "x" tiles available in arcade 7x7 mode
+var endScore = 0;
+var endMisses = 0;
+//---
 var row;
 var length;
 
@@ -36,9 +49,12 @@ var hour;
 var numTurns;
 var numElem;
 var numElem2
-var endTime;
+var endTimeM;
+var endTimeS;
 var doAttack;
 var doArcade;
+var attackFinished = false;
+var arcadeFinished = false;
 var timeLevelPassed = [];
 var arcadeLevelPassed = [];
 var active13;
@@ -56,6 +72,8 @@ function setTime() {
 	numElem = 0;
 	doAttack = false;
 	doArcade = false;
+	attackFinished = false;
+	arcadeFinished = false;
 	//
 	timeLevelPassed[0] = false;
 	timeLevelPassed[1] = false;
@@ -94,10 +112,18 @@ function setDatabase() {
 	});
 }
 function arcade() {
+	attackFinished = false;
+  arcadeFinished = false;
+	min = 0;
+	sec = 0;
 	numElem = 0;
 	numTurns = 0;
 	doArcade = true;
 	doAttack = false;
+	hitCount7 = 0;
+	hitCount13 = 0;
+	arcadeMisses7 = 0;
+	arcadeEmpty7 = 0;
 	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active7) {
 		deleteTable();
 		loadLevel1();
@@ -112,11 +138,20 @@ function arcade() {
 	displayTips();
 }
 function attack() {
+	attackFinished = false;
+  arcadeFinished = false;
+	min = 0;
+	sec = 0;
 	numElem = 0;
 	numTurns = 0;
 	doAttack = true;
 	doArcade = false;
-	endTime = min + 1;
+	endTimeM = min + 1;
+	endTimeS = sec;
+	hitCount7 = 0;
+	hitCount13 = 0;
+	attackMisses7 = 0;
+	attackEmpty7 = 0;
 	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active7) {
 		deleteTable();
 		loadLevel1();
@@ -168,6 +203,14 @@ function createLevel() {
 	}
 	addTips();
 	displayTips();
+
+	if (doAttack) {
+		attackEmpty7 = attackEmpty7 + (49 - squareCount7);
+	}
+
+	if (doArcade) {
+		arcadeEmpty7 = arcadeEmpty7 + (49 - squareCount7);
+	}
 
 	document.getElementById("elements").innerHTML = numElem;
 	/* -------------------- For 13x13 tables -------------------------*/
@@ -318,7 +361,7 @@ function displayTips() {
 			if (rowTip2[i][j] > 0) {
 				var elemID = "" + "s" + i;
 				var element = document.getElementById(elemID);
-				console.log(element);
+				//console.log(element);
 				var insElement = " " + rowTip2[i][j];
 				element.insertAdjacentHTML('beforeend', insElement);
 			}
@@ -364,20 +407,15 @@ function update() {
 				}
 			}
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
-			{
-				$.ajax({
-					type: 'POST',
-					url: 'http://localhost/picross/gamescores.php',
-					data: {'score':12},
-				});
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2]) {
+				 
 				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
-				doAttack = false;
+				doAttack = false; 
 			}
 		}
 		if (doAttack && active13) {
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false&&doTrans2[0]) {
+			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false && doTrans2[0]) {
 				deleteTable();
 				loadLevel5();
 				if (docreate) {
@@ -388,7 +426,7 @@ function update() {
 			}
 
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false&&doTrans2[1]) {
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false && doTrans2[1]) {
 				deleteTable();
 				loadLevel6();
 				if (docreate) {
@@ -398,8 +436,7 @@ function update() {
 				}
 			}
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
-			{
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2]) {
 				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 				doAttack = false;
 			}
@@ -428,12 +465,12 @@ function update() {
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2]) {
 				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
-				doArcade = false;
+				doArcade = false; 
 			}
 		}
 
 		if (doArcade && active13) {
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false&&doTrans2[2]) {
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false && doTrans2[2]) {
 				deleteTable();
 				loadLevel5();
 				if (docreate) {
@@ -442,7 +479,7 @@ function update() {
 					createLevel();
 				}
 			}
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false&&doTrans2[3]) {
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false && doTrans2[3]) {
 				deleteTable();
 				loadLevel6();
 				if (docreate) {
@@ -451,9 +488,8 @@ function update() {
 					createLevel();
 				}
 			}
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
-				{
-					alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2]) {
+				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 				doArcade = false;
 			}
 		}
@@ -484,6 +520,9 @@ function createTable(rowSize, colSize) {
 }
 
 function deleteTable() {
+	randomMisses7 = 0;
+	gameMode = "";
+	randomScore7 = 0;
 	squareCount7 = 0;
 	numElem = 0;
 	numTurns = 0;
@@ -492,7 +531,7 @@ function deleteTable() {
 	delTips();
 	for (var i = 0; i < x.length; i++) {
 		var item = x[i];
-		//item.style.backgroundColor = "rgba(170, 170, 170, 0.4)";
+		item.style.backgroundColor = "rgba(170, 170, 170, 0.4)";
 		item.innerHTML = "";
 	}
 }
@@ -517,7 +556,6 @@ function cellClick() {
 }
 
 function checkAns(cel) {
-	
 	/* -------------------- For 7x7 tables -------------------------*/
 	if (cel.parentNode.parentNode.parentNode.id == "table") {
 		var num = cel.id.split('');
@@ -542,6 +580,11 @@ function checkAns(cel) {
 			cel.style.backgroundColor = "rgba(255, 255, 255, 0.65)";
 			//cel.style.boxShadow = "0 0 5px 2px rgba(170, 170, 170, 0.4) inset";
 			if (boolArr7[splitted[0]][splitted[1]] != 2) {
+				randomMisses7++;
+				if (doArcade)
+					arcadeMisses7++;
+				if (doAttack)
+					attackMisses7++;
 				boolArr7[splitted[0]][splitted[1]] = 2;
 				/* ----------------Displaying the number of turns ---------------*/
 				numTurns++;
@@ -569,17 +612,16 @@ function checkAns(cel) {
 	console.log("numElem:", numElem);
 	console.log("SquareCount7:", squareCount7);*/
 	checkVictory();
-	var post = "luke";
-	$.ajax({
-		url: 'http://localhost/picross/gameScores.php',
-		data: {score: min },
-		type: 'post',
-		success: function(output) { alert("success", output);},
-		error: function(xhr, textStatus, error){
-			alert(xhr.statusText);
-			alert(textStatus);
-			alert(error);}
-	});
+
+	console.clear()
+	console.log("randomMisses7: ", randomMisses7);
+	console.log("attackMisses7: ", attackMisses7);
+	console.log("attackEmpty7: ", attackEmpty7);
+	console.log("arcadeMisses7: ", arcadeMisses7);
+	console.log("arcadeEmpty7: ", arcadeEmpty7);
+	console.log("squareCount7: ", squareCount7);
+	console.log("hitCount7: ", hitCount7);
+
 }
 
 function checkVictory() {
@@ -602,7 +644,8 @@ function checkVictory() {
 				console.log("level 3 passed");
 				timeLevelPassed[2] = true;
 				hitCount7 = 0;
-				return;
+				attackFinished = true;
+				//return;
 			}
 		}
 		if (doArcade) {
@@ -622,10 +665,61 @@ function checkVictory() {
 				arcadeLevelPassed[2] = true;
 				console.log("level 3 passed");
 				hitCount7 = 0;
-				return;
+				arcadeFinished = true;
+				//return;
 			}
 		}
+
 		alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+
+		if (active7 && !doArcade && !doAttack) {
+			randomScore7 = Math.abs(49 - squareCount7);
+			randomScore7 = randomScore7 - randomMisses7;
+			endScore = "" + randomScore7;
+			gameMode = "Random";
+			endMisses = "" + randomMisses7;
+		}
+
+		if (active7 && arcadeFinished) {
+			endScore = arcadeEmpty7 - arcadeMisses7;
+			endScore = "" + endScore;
+			gameMode = "Arcade";
+			endMisses = "" + arcadeMisses7;
+			alert("Yup");
+			arcadeFinished = false;
+		}
+
+		if (active7 && attackFinished) {
+			endScore = attackEmpty7 - attackMisses7;
+			endScore = "" + endScore;
+			gameMode = "Attack";
+			endMisses = "" + attackMisses7;
+			alert("Yup");
+			attackFinished = false
+		}
+
+		var timeSpent = hour + ":" + min + ":" + sec;
+
+		if (active7) {
+			$.ajax({
+				url: 'http://localhost/picross/gameScores.php',
+				data: { score: endScore, spentTime: timeSpent, gameType: gameMode, totalErrs: endMisses },
+				type: 'post',
+				success: function (output) { },
+				error: function (xhr, textStatus, error) {
+					alert(xhr.statusText);
+					alert(textStatus);
+					alert(error);
+				}
+			});
+		}
+
+
+		if (active13) {
+
+		}
+
+
 
 
 	}
@@ -634,8 +728,17 @@ function checkVictory() {
 function initTableAnsw() {
 	deleteTable();
 	/* -------------------- For 7x7 tables -------------------------*/
+	doArcade = false;
+	doAttack = false;
+	attackFinished = false;
+  arcadeFinished = false;
+	hitCount7 = 0;
+	min = 0;
+	sec = 0;
 	numElem = 0;
 	numTurns = 0;
+	randomScore7 = 0;
+	randomMisses7 = 0;
 	document.getElementById("turns").innerHTML = numTurns;
 	var tbl = document.getElementById("table");
 	for (var i = 0; i < tbl.rows.length - 1; i++) {
@@ -651,8 +754,8 @@ function initTableAnsw() {
 			colTip[i][j] = 0;
 			if (ran == 1) {
 				numElem++;
-				if(active7)
-				document.getElementById("elements").innerHTML = numElem;
+				if (active7)
+					document.getElementById("elements").innerHTML = numElem;
 			}
 		}
 	}
@@ -664,41 +767,41 @@ function initTableAnsw() {
 			}
 		}
 	}
-	
+
 	/* -------------------- For 13x13 tables -------------------------*/
 	numElem2 = 0;
-		numTurns = 0;
-		document.getElementById("turns").innerHTML = numTurns;
-		var tbl2 = document.getElementById("table2");
-		for (var i = 0; i < tbl2.rows.length - 1; i++) {
-			hitArr2.push([]);
-			boolArr13.push([]);
-			rowTip2.push([]);
-			colTip2.push([]);
-			for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
-				var ran = Math.round(Math.random());
-				hitArr2[i][j] = ran;
-				boolArr13[i][j] = 0;
-				rowTip2[i][j] = 0;
-				colTip2[i][j] = 0;
-				if (ran == 1) {
-					numElem2++;
-					if(active13)
+	numTurns = 0;
+	document.getElementById("turns").innerHTML = numTurns;
+	var tbl2 = document.getElementById("table2");
+	for (var i = 0; i < tbl2.rows.length - 1; i++) {
+		hitArr2.push([]);
+		boolArr13.push([]);
+		rowTip2.push([]);
+		colTip2.push([]);
+		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
+			var ran = Math.round(Math.random());
+			hitArr2[i][j] = ran;
+			boolArr13[i][j] = 0;
+			rowTip2[i][j] = 0;
+			colTip2[i][j] = 0;
+			if (ran == 1) {
+				numElem2++;
+				if (active13)
 					document.getElementById("elements").innerHTML = numElem2;
-				}
 			}
 		}
-		for (var i = 0; i < tbl2.rows.length - 1; i++) {
-			for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
-				if (hitArr2[i][j] == "1") {
-					squareCount13++;
-					//tbl.rows[i].cells[j].style.backgroundColor = "";
-				}
+	}
+	for (var i = 0; i < tbl2.rows.length - 1; i++) {
+		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
+			if (hitArr2[i][j] == "1") {
+				squareCount13++;
+				//tbl.rows[i].cells[j].style.backgroundColor = "";
 			}
 		}
-		addTips();
-		displayTips();
-		console.log(hitArr2);
+	}
+	addTips();
+	displayTips();
+	console.log(hitArr2);
 }
 
 function colorFunction(color) {
@@ -755,7 +858,7 @@ function timer() {
 		}
 		if (hour > 0)
 			document.getElementById("demo").innerHTML = hour + " hours " + min + " minutes " + sec + " seconds";
-		if (min >= endTime && doAttack) {
+		if ((min >= endTimeM && sec >= endTimeS) && doAttack) {
 			alert("fail");
 			//console.log(min);
 			doAttack = false;
@@ -853,7 +956,7 @@ function addTips() {
 			else {
 				rowTip2[i][a] = rowTip2[i][a];
 			}
-	
+
 			if (hitArr2[j][i] == 1 && hitArr2[j + 1][i] == 1) {
 				colTip2[i][b]++;
 			}
@@ -865,7 +968,7 @@ function addTips() {
 				colTip2[i][b] = colTip2[i][b];
 			}
 		}
-}
+	}
 	//console.log(rowTip);
 	//console.log(colTip);
 }

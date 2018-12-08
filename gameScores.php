@@ -1,4 +1,5 @@
 <?php
+session_start();
 //$parameter="this is a php variable";
 //echo "var myval=foo(" . parameter . ");";
    $dbhost = '10.62.70.129';
@@ -8,13 +9,21 @@
 
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbdata);
 
-    $score=  $_POST['score'];
-    $usersname = $_SESSION['username']
+    $score=  $_POST['score'] ?? '';
+    $spentTime=  $_POST['spentTime'] ?? '';
+    $gameType=  $_POST['gameType'] ?? '';
+    $mistakes=  $_POST['totalErrs'] ?? '';
+    $usersname = $_SESSION['username'] ?? '';
     //$decoded = json_decode($parameter, true);
-    echo ($parameter);
 
-    $sql = "INSERT INTO `high_scores7x7`(`player`, `score`) VALUES ('$usersname','$score')";   
+    if(!empty($score))
+    {
+    $sql = "INSERT INTO `high_scores7x7`(`player`, `score`, `duration`, `mode`, `errors`) VALUES ('$usersname','$score', '$spentTime', '$gameType', '$mistakes')";   
     $retval = mysqli_query( $conn, $sql );
+    }
+    
+    
+    
 
 ?>
 

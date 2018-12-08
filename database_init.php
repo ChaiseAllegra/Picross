@@ -323,16 +323,18 @@ mysqli_query($conn, $row13);
 //-------------------------------------------------------------------------//
 $sql="CREATE TABLE IF NOT EXISTS high_scores7x7 (
     player varchar(20),
-    score INT NOT NULL,
+    score varchar(20),
     mode varchar(20),
-    errors INT NOT NULL
+    errors varchar(20),
+    duration varchar(20)
     )";
 $retval=mysqli_query($conn,$sql);
 $sql="CREATE TABLE IF NOT EXISTS high_scores13x13 (
-    player varchar(20) NOT NULL,
-    score INT NOT NULL,
-    mode varchar(20) NOT NULL,
-    errors INT NOT NULL
+    player varchar(20),
+    score varchar(20),
+    mode varchar(20),
+    errors varchar(20),
+    duration varchar(20)
     )";
 $retval=mysqli_query($conn,$sql);
 /*if($retval)
