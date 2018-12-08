@@ -26,6 +26,8 @@ var isLevel7;
 /* ------------- Variables for displaying --------------- */
 var rowTip = [];
 var colTip = [];
+var rowTip2 = [];
+var colTip2 = [];
 
 var it;//holds json info
 var sec;
@@ -33,6 +35,7 @@ var min;
 var hour;
 var numTurns;
 var numElem;
+var numElem2
 var endTime;
 var doAttack;
 var doArcade;
@@ -170,7 +173,7 @@ function createLevel() {
 	/* -------------------- For 13x13 tables -------------------------*/
 	var tbl2 = document.getElementById("table2");
 	i = 0;
-	/*while (i < 13) {
+	while (i < 13) {
 		hitArr2.push([]);
 		hitArr2[i][0] = it[i]['one'];
 		hitArr2[i][1] = it[i]['two'];
@@ -202,7 +205,7 @@ function createLevel() {
 				squareCount13++;
 			}
 		}
-	}*/
+	}
 	document.getElementById("elements").innerHTML = numElem;
 
 }
@@ -246,8 +249,6 @@ function loadLevel3() {
 	});
 }
 
-
-
 function loadLevel4() {
 	$.ajax({
 		type: 'GET',
@@ -284,7 +285,9 @@ function loadLevel6() {
 		}
 	});
 }
+
 function displayTips() {
+	//---------------------------------------7x7------------------------------------//
 	tbl = document.getElementById("table");
 	for (var i = 0; i < rowTip.length; i++) {
 		for (var j = 0; j < rowTip.length; j++) {
@@ -303,6 +306,31 @@ function displayTips() {
 				var elemID = "" + "r" + (i + 1);
 				var element = document.getElementById(elemID);
 				var insElement = " " + colTip[i][j] + "<br>";
+				element.insertAdjacentHTML('beforeend', insElement);
+			}
+		}
+	}
+
+	//---------------------------------------13x13------------------------------------//
+	tbl2 = document.getElementById("table2");
+	for (var i = 0; i < rowTip2.length; i++) {
+		for (var j = 0; j < rowTip2.length; j++) {
+			if (rowTip2[i][j] > 0) {
+				var elemID = "" + "s" + i;
+				var element = document.getElementById(elemID);
+				console.log(element);
+				var insElement = " " + rowTip2[i][j];
+				element.insertAdjacentHTML('beforeend', insElement);
+			}
+		}
+	}
+
+	for (var i = 0; i < colTip2.length; i++) {
+		for (var j = 0; j < colTip2.length; j++) {
+			if (colTip2[i][j] > 0) {
+				var elemID = "" + "k" + (i + 1);
+				var element = document.getElementById(elemID);
+				var insElement = " " + colTip2[i][j] + "<br>";
 				element.insertAdjacentHTML('beforeend', insElement);
 			}
 		}
@@ -344,19 +372,32 @@ function update() {
 		}
 		if (doAttack && active13) {
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false) {
-				loadLevel4();
-				createLevel();
+			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false&&doTrans2[0]) {
+				deleteTable();
+				loadLevel5();
+				if (docreate) {
+					doTrans2[0] = false;
+					docreate = false;
+					createLevel();
+				}
 			}
 
 
-			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false) {
-				loadLevel5();
-				createLevel();
+			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2] == false&&doTrans2[1]) {
+				deleteTable();
+				loadLevel6();
+				if (docreate) {
+					doTrans2[1] = false;
+					docreate = false;
+					createLevel();
+				}
 			}
 
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
+			{
+				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 				doAttack = false;
+			}
 		}
 
 		if (doArcade && active7) {
@@ -387,16 +428,29 @@ function update() {
 		}
 
 		if (doArcade && active13) {
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false) {
-				loadlevel5();
-				createLevel();
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false&&doTrans2[2]) {
+				deleteTable();
+				loadLevel5();
+				if (docreate) {
+					doTrans2[2] = false;
+					docreate = false;
+					createLevel();
+				}
 			}
-			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false) {
-				loadlevel6();
-				createLevel();
+			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2] == false&&doTrans2[3]) {
+				deleteTable();
+				loadLevel6();
+				if (docreate) {
+					doTrans[3] = false;
+					docreate = false;
+					createLevel();
+				}
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2])
+				{
+					alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 				doArcade = false;
+			}
 		}
 	}, 1000);
 }
@@ -433,7 +487,7 @@ function deleteTable() {
 	delTips();
 	for (var i = 0; i < x.length; i++) {
 		var item = x[i];
-		item.style.backgroundColor = "rgba(170, 170, 170, 0.4)";
+		//item.style.backgroundColor = "rgba(170, 170, 170, 0.4)";
 		item.innerHTML = "";
 	}
 }
@@ -581,6 +635,7 @@ function initTableAnsw() {
 			colTip[i][j] = 0;
 			if (ran == 1) {
 				numElem++;
+				if(active7)
 				document.getElementById("elements").innerHTML = numElem;
 			}
 		}
@@ -593,24 +648,41 @@ function initTableAnsw() {
 			}
 		}
 	}
+	
 	/* -------------------- For 13x13 tables -------------------------*/
-	var tbl2 = document.getElementById("table2");
-	for (var i = 0; i < tbl2.rows.length - 1; i++) {
-		hitArr2.push([]);
-		boolArr7.push([]);
-		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++)
-			hitArr2[i][j] = Math.round(Math.random());
-	}
-	for (var i = 0; i < tbl2.rows.length - 1; i++) {
-		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
-			if (hitArr2[i][j] == "1") {
-				squareCount13++;
-				tbl2.rows[i].cells[j].style.backgroundColor = "";
+	numElem2 = 0;
+		numTurns = 0;
+		document.getElementById("turns").innerHTML = numTurns;
+		var tbl2 = document.getElementById("table2");
+		for (var i = 0; i < tbl2.rows.length - 1; i++) {
+			hitArr2.push([]);
+			boolArr13.push([]);
+			rowTip2.push([]);
+			colTip2.push([]);
+			for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
+				var ran = Math.round(Math.random());
+				hitArr2[i][j] = ran;
+				boolArr13[i][j] = 0;
+				rowTip2[i][j] = 0;
+				colTip2[i][j] = 0;
+				if (ran == 1) {
+					numElem2++;
+					if(active13)
+					document.getElementById("elements").innerHTML = numElem2;
+				}
 			}
 		}
-	}
-	addTips();
-	displayTips();
+		for (var i = 0; i < tbl2.rows.length - 1; i++) {
+			for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
+				if (hitArr2[i][j] == "1") {
+					squareCount13++;
+					//tbl.rows[i].cells[j].style.backgroundColor = "";
+				}
+			}
+		}
+		addTips();
+		displayTips();
+		console.log(hitArr2);
 }
 
 function colorFunction(color) {
@@ -746,11 +818,44 @@ function addTips() {
 		}
 		/*-----------------------------------------------*/
 	}
+	tbl2 = document.getElementById("table2");
+	hitArr2.push([]); //without this, the columns don't work and throw an out of bounds error on array.
+	var a; //incrementer for the row tips array
+	var b; //incrementer for the col tips array
+	for (var i = 0; i < tbl2.rows.length - 1; i++) {
+		a = 0;
+		b = 0;
+		for (var j = 0; j < tbl2.rows[i].cells.length - 1; j++) {
+			if (hitArr2[i][j] == 1 && hitArr2[i][j + 1] == 1) {
+				rowTip2[i][a] = rowTip2[i][a] + 1;
+
+			}
+			else if (hitArr2[i][j] == 1 && hitArr2[i][j + 1] != 1) {
+				rowTip2[i][a] = rowTip2[i][a] + 1;
+				a++;
+			}
+			else {
+				rowTip2[i][a] = rowTip2[i][a];
+			}
+	
+			if (hitArr2[j][i] == 1 && hitArr2[j + 1][i] == 1) {
+				colTip2[i][b]++;
+			}
+			else if (hitArr2[j][i] == 1 && hitArr2[j + 1][i] != 1) {
+				colTip2[i][b]++;
+				b++;
+			}
+			else {
+				colTip2[i][b] = colTip2[i][b];
+			}
+		}
+}
 	//console.log(rowTip);
 	//console.log(colTip);
 }
 
 function delTips() {
+	//-----------------------------7x7-----------------------//
 	document.getElementsByTagName("table");
 	var row = document.getElementsByClassName("rowLabel");
 	var col = document.getElementsByClassName("colLabel");
@@ -769,6 +874,7 @@ function delTips() {
 	//console.log("Attempted to delete tips");
 	delete colTip;
 	delete rowTip;
+	//-----------------------------13x13-----------------------//
 }
 
 function level1() { console.log("wrong function"); }

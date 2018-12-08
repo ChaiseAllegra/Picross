@@ -134,7 +134,8 @@ div#tblCont2 table {
     width: 47.5%;
 }
 div#tblCont2 td {
-    width: 7%;
+    width: 4em;
+    height: 2.0em;
 }
 td .content {
     position:absolute;
