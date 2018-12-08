@@ -320,7 +320,20 @@ $row13 = "INSERT INTO 3_13x13 (one,two,three,four,five,six,seven,eight,nine,ten,
 VALUES (1, 0, 0, 1, 0, 0, , 0, 0, 0, 0, 0, 0);";
 mysqli_query($conn, $row13);
 //-------------------------------------------------------------------------//
-
+$sql="CREATE TABLE IF NOT EXISTS high_scores7x7 (
+    player varchar(20),
+    score INT NOT NULL,
+    mode varchar(20),
+    errors INT NOT NULL
+    )";
+$retval=mysqli_query($conn,$sql);
+$sql="CREATE TABLE IF NOT EXISTS high_scores13x13 (
+    player varchar(20) NOT NULL,
+    score INT NOT NULL,
+    mode varchar(20) NOT NULL,
+    errors INT NOT NULL
+    )";
+$retval=mysqli_query($conn,$sql);
 /*if($retval)
         echo("Success db <br>");
 

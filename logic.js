@@ -366,6 +366,11 @@ function update() {
 
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2])
 			{
+				$.ajax({
+					type: 'POST',
+					url: 'http://localhost/picross/gamescores.php',
+					data: {'score':12},
+				});
 				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 				doAttack = false;
 			}
@@ -512,7 +517,7 @@ function cellClick() {
 }
 
 function checkAns(cel) {
-
+	
 	/* -------------------- For 7x7 tables -------------------------*/
 	if (cel.parentNode.parentNode.parentNode.id == "table") {
 		var num = cel.id.split('');
@@ -564,6 +569,16 @@ function checkAns(cel) {
 	console.log("numElem:", numElem);
 	console.log("SquareCount7:", squareCount7);*/
 	checkVictory();
+	var post = {'score' : 'Jas'};
+	var jpost = JSON.stringify(post);
+	$.ajax({
+		url: 'http://localhost/picross/gameScores.php',
+		data: {score: 'jas'},
+		type: 'post',
+		dataType: 'json',
+		success: function(output) { alert("success", output);},
+		error: function(request, status, error){alert("fail", request);}
+	});
 }
 
 function checkVictory() {
