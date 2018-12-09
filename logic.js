@@ -750,6 +750,7 @@ function checkVictory() {
 			endScore = "" + randomScore7;
 			gameMode = "Random";
 			endMisses = "" + randomMisses7;
+			deleteTable();
 		}
 
 		if (active7 && arcadeFinished) {
