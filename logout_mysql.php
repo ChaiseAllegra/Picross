@@ -9,6 +9,6 @@ $_SESSION = array();
 session_destroy();
  
 // Redirect to login page
-header("location: login_mysql.php");
+header("location: page_game.html");
 exit;
 ?>

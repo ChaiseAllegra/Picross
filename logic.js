@@ -23,6 +23,10 @@ var arcadeEmpty7 = 0;//Hows the total amount of wrong "x" tiles available in arc
 var endScore = 0;
 var endMisses = 0;
 //---
+
+var loginName = "";
+var populatedUsername = false;
+
 var row;
 var length;
 
@@ -41,6 +45,13 @@ var rowTip = [];
 var colTip = [];
 var rowTip2 = [];
 var colTip2 = [];
+
+
+var scoreList = [];
+var nameList = [];
+var timeList = [];
+var mistakeList = [];
+var parsedData = [];
 
 var it;//holds json info
 var sec;
@@ -97,6 +108,8 @@ function setTime() {
 	active7 = true;
 	docreate = false;
 	setDatabase();
+	checkLoginStatus();
+	initTableAnsw();
 
 }
 function setDatabase() {
@@ -112,8 +125,21 @@ function setDatabase() {
 	});
 }
 function arcade() {
+	
+	docreate = false;
 	attackFinished = false;
-  arcadeFinished = false;
+	arcadeFinished = false;
+	arcadeLevelPassed[0] = false;
+	arcadeLevelPassed[1] = false;
+	arcadeLevelPassed[2] = false;
+	doTrans[0] = true;
+	doTrans[1] = true;
+	doTrans[2] = true;
+	doTrans[3] = true;
+	doTrans2[0] = true;
+	doTrans2[1] = true;
+	doTrans2[2] = true;
+	doTrans2[3] = true;
 	min = 0;
 	sec = 0;
 	numElem = 0;
@@ -124,22 +150,37 @@ function arcade() {
 	hitCount13 = 0;
 	arcadeMisses7 = 0;
 	arcadeEmpty7 = 0;
-	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active7) {
+	if (arcadeLevelPassed[0] == false && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false && active7) {
 		deleteTable();
-		loadLevel1();
+			loadLevel1();
+		
+		
 	}
 
-	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active13) {
+	if (arcadeLevelPassed[0] == false && arcadeLevelPassed[1] == false && arcadeLevelPassed[2] == false && active13) {
 		deleteTable();
 		loadLevel4();
 	}
-	createLevel();
+	//createLevel();
 	addTips();
 	displayTips();
 }
 function attack() {
+	
+	docreate = false;
+	timeLevelPassed[0] = false;
+	timeLevelPassed[1] = false;
+	timeLevelPassed[2] = false;
+	doTrans[0] = true;
+	doTrans[1] = true;
+	doTrans[2] = true;
+	doTrans[3] = true;
+	doTrans2[0] = true;
+	doTrans2[1] = true;
+	doTrans2[2] = true;
+	doTrans2[3] = true;
 	attackFinished = false;
-  arcadeFinished = false;
+	arcadeFinished = false;
 	min = 0;
 	sec = 0;
 	numElem = 0;
@@ -154,13 +195,14 @@ function attack() {
 	attackEmpty7 = 0;
 	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active7) {
 		deleteTable();
-		loadLevel1();
+			loadLevel1();
+		
 	}
 	if (timeLevelPassed[0] == false && timeLevelPassed[1] == false && timeLevelPassed[2] == false && active13) {
 		deleteTable();
 		loadLevel4();
 	}
-	createLevel();
+	//createLevel();
 	//addTips();
 	//displayTips();
 	//need to add timeLevelPassed[1]=true; to the win condition
@@ -253,18 +295,22 @@ function createLevel() {
 
 }
 function loadLevel1() {
+	//alert("Loading level 1");
 	delete it;
 	$.ajax({
 		type: 'GET',
 		url: 'http://localhost/picross/levelLoad.php',
 		//data: {action: "yeet"},    
 		success: function (data) {
-			//console.log(data);
-			it = JSON.parse(data);
+			it = JSON.parse(data); 
+			delTips();
+			createLevel();
 		}
 	});
 }
 function loadLevel2() {
+	
+	//alert("Loading level 2");
 	delete it;
 	$.ajax({
 
@@ -280,6 +326,8 @@ function loadLevel2() {
 	});
 }
 function loadLevel3() {
+	
+	//alert("Loading level 3");
 	$.ajax({
 		type: 'GET',
 		url: 'http://localhost/picross/levelLoad3.php',
@@ -329,6 +377,26 @@ function loadLevel6() {
 	});
 }
 
+function checkLoginStatus() {
+	lgn = document.getElementById("login");
+	lgt = document.getElementById("logout");
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost/picross/getUsername.php',
+		//data: {action: "yeet"},    
+		success: function (data) {
+			//console.log(data);
+			loginName = JSON.parse(data);
+			if (loginName != "") {
+				lgt.style.visibility = "visible";
+				lgn.innerHTML = loginName;
+				populatedUsername = true;
+			}
+		}
+	});
+
+
+}
 function displayTips() {
 	//---------------------------------------7x7------------------------------------//
 	tbl = document.getElementById("table");
@@ -384,6 +452,8 @@ function update() {
 	var x = setInterval(function () {
 		var i = 0;
 
+		//checkLoginStatus();
+		//console.log(loginName);
 		if (doAttack && active7) {
 
 			if (timeLevelPassed[0] && timeLevelPassed[1] == false && timeLevelPassed[2] == false && doTrans[2]) {
@@ -408,9 +478,9 @@ function update() {
 			}
 
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2]) {
-				 
-				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
-				doAttack = false; 
+
+				//alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+				doAttack = false;
 			}
 		}
 		if (doAttack && active13) {
@@ -437,7 +507,7 @@ function update() {
 			}
 
 			if (timeLevelPassed[0] && timeLevelPassed[1] && timeLevelPassed[2]) {
-				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+				//alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 				doAttack = false;
 			}
 		}
@@ -464,8 +534,9 @@ function update() {
 
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2]) {
-				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
-				doArcade = false; 
+				//alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+				deleteTable();
+				doArcade = false;
 			}
 		}
 
@@ -489,7 +560,7 @@ function update() {
 				}
 			}
 			if (arcadeLevelPassed[0] && arcadeLevelPassed[1] && arcadeLevelPassed[2]) {
-				alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+				//alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
 				doArcade = false;
 			}
 		}
@@ -670,7 +741,8 @@ function checkVictory() {
 			}
 		}
 
-		alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+		//alert("You Won! " + " Completion time: " + hour + " hours " + min + " minutes " + sec + " seconds");
+
 
 		if (active7 && !doArcade && !doAttack) {
 			randomScore7 = Math.abs(49 - squareCount7);
@@ -685,7 +757,6 @@ function checkVictory() {
 			endScore = "" + endScore;
 			gameMode = "Arcade";
 			endMisses = "" + arcadeMisses7;
-			alert("Yup");
 			arcadeFinished = false;
 		}
 
@@ -694,13 +765,23 @@ function checkVictory() {
 			endScore = "" + endScore;
 			gameMode = "Attack";
 			endMisses = "" + attackMisses7;
-			alert("Yup");
 			attackFinished = false
+		}
+
+		if (loginName != "") {
+			document.getElementById('winningText').innerHTML = "Congratulations " + loginName + ", you won! <br>GameMode: " + gameMode + "<br>Time Spent: " + hour + "h: " + min + "m: " + sec + "s<br>Score: " + endScore + "<br>Mistakes: " + endMisses + "<br><br>";
+			document.getElementById('light').style.display = 'block';
+			document.getElementById('fade').style.display = 'block';
+		}
+		else {
+			document.getElementById('winningText').innerHTML = "Congratulations, you won! <br>GameMode: " + gameMode + "<br>Time Spent: " + hour + "h: " + min + "m: " + sec + "s<br>Score: " + endScore + "<br>Mistakes: " + endMisses + "<br><br>";
+			document.getElementById('light').style.display = 'block';
+			document.getElementById('fade').style.display = 'block';
 		}
 
 		var timeSpent = hour + ":" + min + ":" + sec;
 
-		if (active7) {
+		if (active7 && loginName != "") {
 			$.ajax({
 				url: 'http://localhost/picross/gameScores.php',
 				data: { score: endScore, spentTime: timeSpent, gameType: gameMode, totalErrs: endMisses },
@@ -731,7 +812,7 @@ function initTableAnsw() {
 	doArcade = false;
 	doAttack = false;
 	attackFinished = false;
-  arcadeFinished = false;
+	arcadeFinished = false;
 	hitCount7 = 0;
 	min = 0;
 	sec = 0;
@@ -763,7 +844,7 @@ function initTableAnsw() {
 		for (var j = 0; j < tbl.rows[i].cells.length - 1; j++) {
 			if (hitArr[i][j] == "1") {
 				squareCount7++;
-				//tbl.rows[i].cells[j].style.backgroundColor = "";
+				//tbl.rows[i + 1].cells[j + 1].style.backgroundColor = "grey";
 			}
 		}
 	}
@@ -1098,4 +1179,101 @@ function level3() {//creates
 			}
 		}
 	}
+}
+
+function submitChoice(a) {
+	//alert("in here boi");
+	tbl = document.getElementById('hiScoreTable');
+	tbl.innerHTML = "";
+	$.ajax({
+		url: 'http://localhost/picross/highScores.php',
+		data: { selectIf: a },
+		type: 'GET',
+		success: function (data) {
+			parsedData = JSON.parse(data);
+			for (var i = 0; i < parsedData.length; i++) {
+				scoreList.push([]);
+				scoreList[i] = parsedData[i]['score'];
+				nameList[i] = parsedData[i]['player'];
+				timeList[i] = parsedData[i]['duration'];
+				mistakeList[i] = parsedData[i]['errors'];
+			}
+			console.log("Name: ", nameList, "Scores: ", scoreList, "Duration: ", timeList);
+
+			 
+			//tbl.innerHTML = "";
+
+			for (var i = 0; i < parsedData.length + 1; i++) {
+				var row = tbl.insertRow(i);
+				for (var j = 0; j < 5; j++) {
+					if (i == 0) {
+						var parent = tbl.children[0];
+						var th = document.createElement('th');
+						if (j == 0) {
+							th.innerText = "#";
+						}
+						if (j == 1) {
+							th.innerText = "Player";
+						}
+						if (j == 2) {
+							th.innerText = "Score";
+						}
+						if (j == 3) {
+							th.innerText = "Time";
+						}
+						if (j == 4) {
+							th.innerText = "Errors";
+						}
+						parent.appendChild(th);
+					}
+					else {
+						
+					var cell = row.insertCell(j);
+						if (j == 0) {
+							cell.innerText = i;
+						}
+						if (j == 1) {
+							cell.innerText = nameList[i - 1];
+						}
+						if (j == 2) {
+							cell.innerText = scoreList[i - 1];
+						}
+						if (j == 3) {
+							cell.innerText = timeList[i - 1];
+						}
+						if (j == 4) {
+							cell.innerText = mistakeList[i - 1];
+						}
+					}
+
+				}
+			}
+
+		},
+		error: function (xhr, textStatus, error) {
+			alert(xhr.statusText);
+			alert(textStatus);
+			alert(error);
+		}
+	});
+
+
+
+
+}
+
+function getScores() {
+	/*	$.ajax({
+    type: 'GET',
+    url: 'http://localhost/picross/highScores.php', 
+    success: function (data) {
+      parsedData = data;
+		}
+	});
+
+	for (var i = 0; i < parsedData.length; i++) {
+		scoreList.push([]);
+		scoreList[i] = parsedData[i]['score'];
+	}*/
+	//console.log("Scores: ", scoreList);
 }

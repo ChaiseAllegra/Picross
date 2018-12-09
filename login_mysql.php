@@ -1,3 +1,4 @@
+<script type="text/javascript" src="logic.js"></script>
 <?php
 // Include config file
 require_once 'config_mysql.php';
@@ -48,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             /* Password is correct, so start a new session and
                             save the username to the session */
                             session_start();
-                            $_SESSION['username'] = $username;      
+                            $_SESSION['username'] = $username; 
                             header("location: page_game.html");
                             
                         } else{
@@ -70,11 +71,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     mysqli_close($link);
 }
+
 ?>
  
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
     <title>Log in</title>
     <link rel="stylesheet" href="styleGame.css">
@@ -87,13 +90,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ewert|Gravitas+One|Monoton" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|Eczar|Gentium+Basic|Libre+Baskerville|Libre+Franklin|Proza+Libre|Rubik|Taviraj|Trirong|Work+Sans"
-        rel="stylesheet">
-    <script type="text/javascript" src="logic.js"></script>
+        rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Noto+Serif" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|Eczar|Gentium+Basic|Libre+Baskerville|Libre+Franklin|Proza+Libre|Rubik|Taviraj|Trirong|Work+Sans"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ewert|Gravitas+One|Monoton" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
     <section id="register">
@@ -113,7 +116,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span><?php echo $password_err; ?></span>
             </div>
             <div>
-                <input type="submit" value="Submit">
+                <input  type="submit" value="Submit"  >
             </div>
             <p>Don't have an account? <a href="register_mysql.php">Sign up now</a>.</p>
         </form>
