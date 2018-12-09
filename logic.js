@@ -749,8 +749,7 @@ function checkVictory() {
 			randomScore7 = randomScore7 - randomMisses7;
 			endScore = "" + randomScore7;
 			gameMode = "Random";
-			endMisses = "" + randomMisses7;
-			deleteTable();
+			endMisses = "" + randomMisses7; 
 		}
 
 		if (active7 && arcadeFinished) {
@@ -781,13 +780,13 @@ function checkVictory() {
 		}
 
 		var timeSpent = hour + ":" + min + ":" + sec;
-
+		
 		if (active7 && loginName != "") {
 			$.ajax({
 				url: 'http://localhost/picross/gameScores.php',
 				data: { score: endScore, spentTime: timeSpent, gameType: gameMode, totalErrs: endMisses },
 				type: 'post',
-				success: function (output) { },
+				success: function (output){  },
 				error: function (xhr, textStatus, error) {
 					alert(xhr.statusText);
 					alert(textStatus);
@@ -795,7 +794,9 @@ function checkVictory() {
 				}
 			});
 		}
-
+	if (active7 && !doArcade && !doAttack) {
+		deleteTable();
+	}
 
 		if (active13) {
 
