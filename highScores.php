@@ -1,5 +1,5 @@
 <?php
-$dbhost = '192.168.1.38';
+$dbhost = '10.62.68.176';
 $dbuser = 'DeathOnADinosaur';
 $dbpass = 'password';
 $dbdata = "yeet";
